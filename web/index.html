@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nawa - Interactive Book</title>
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts for premium Arabic typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div class="book-container">
         <div id="book" class="book">
             <!-- Pages will be dynamically generated here -->
         </div>
-        
+
         <div class="controls">
             <button id="prevBtn" aria-label="Previous Page">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -33,4 +37,5 @@
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

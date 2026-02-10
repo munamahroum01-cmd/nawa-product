@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const book = document.getElementById('book');
+    const container = document.querySelector('.book-container');
 
     let currentPage = 0;
     let isMobile = window.innerWidth <= 768;
@@ -26,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function checkMobile() {
         isMobile = window.innerWidth <= 768;
-        const container = document.querySelector('.book-container');
         if (container) {
             const style = getComputedStyle(document.documentElement);
             const bookWidth = parseInt(style.getPropertyValue('--book-width'));
@@ -34,12 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (isMobile) {
                 // FORCE HORIZONTAL via Rotation + Scale
-                // We rotate 90deg, so "width" is now vertical and "height" is horizontal
-                const totalWidthRequired = bookHeight * 1.1; // Book is on its side
-                const availableWidthForScaledHeight = window.innerWidth * 0.9;
+                const totalWidthRequired = bookHeight * 1.1;
+                const availableWidthForScaledHeight = window.innerWidth * 0.95;
                 const scale = availableWidthForScaledHeight / totalWidthRequired;
 
-                // Centering is tricky with rotation
                 container.style.transform = `rotate(90deg) scale(${scale})`;
             } else {
                 // Desktop Regular
@@ -54,6 +52,55 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
+    // --- Swipe Interaction ---
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+
+    function handleFooterButtons() {
+        // Not used as per request to hide arrows
+    }
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+
+        // Since the book is rotated 90deg on mobile:
+        // A vertical swipe on the screen is a horizontal flip of the book.
+        // Screen Y axis becomes Book X axis.
+
+        if (isMobile) {
+            const deltaY = touchEndY - touchStartY;
+            if (Math.abs(deltaY) > swipeThreshold) {
+                if (deltaY < 0) { // Swiped Up on Screen -> Flip Next
+                    turnNext();
+                } else { // Swiped Down on Screen -> Flip Prev
+                    turnPrev();
+                }
+            }
+        } else {
+            const deltaX = touchEndX - touchStartX;
+            if (Math.abs(deltaX) > swipeThreshold) {
+                if (deltaX < 0) { // Swiped Left -> Flip Next
+                    turnNext();
+                } else { // Swiped Right -> Flip Prev
+                    turnPrev();
+                }
+            }
+        }
+    }
+
+    document.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+    }, { passive: true });
 
     window.addEventListener('resize', checkMobile);
 
@@ -111,10 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             sheet.addEventListener('click', (e) => {
-                const rect = sheet.getBoundingClientRect();
-                // When rotated 90deg: 
-                // X (side to side) is actually vertical? No, rotate(90deg) rotates the坐标系 too.
-                // Let's rely on simple turn logic for now.
+                // Only trigger if it wasn't a swipe or accidental touch move
                 const allSheets = Array.from(document.querySelectorAll('.page'));
                 const myIndex = allSheets.indexOf(sheet);
 

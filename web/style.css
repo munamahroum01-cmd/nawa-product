@@ -20,6 +20,16 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Prevent body scrolling while allowing page scrolling */
+}
+
 body {
     background: radial-gradient(circle at center, #E6D5B8 0%, #D4B996 50%, #8C7355 100%);
     background-color: var(--bg-color);
@@ -29,9 +39,6 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
-    overflow-x: hidden;
-    width: 100vw;
 }
 
 .book-container {
@@ -43,6 +50,8 @@ body {
     align-items: center;
     transform-origin: center center;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    height: 100%;
 }
 
 .book {
@@ -80,15 +89,24 @@ body {
     backface-visibility: hidden;
     padding: 25px;
     overflow-y: auto;
+    /* Enable vertical scrolling for content overflow */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
     display: flex;
     flex-direction: column;
 }
 
-/* Hide scrollbars */
+/* Hide scrollbars but keep functionality */
 .page-front::-webkit-scrollbar,
 .page-back::-webkit-scrollbar {
-    width: 0px;
+    width: 4px;
     background: transparent;
+}
+
+.page-front::-webkit-scrollbar-thumb,
+.page-back::-webkit-scrollbar-thumb {
+    background: rgba(26, 71, 42, 0.3);
+    border-radius: 10px;
 }
 
 .page-front {
@@ -113,28 +131,32 @@ body {
 
 .page-number {
     position: absolute;
-    bottom: 15px;
+    bottom: 10px;
     font-size: 14px;
     font-weight: bold;
     color: var(--primary-color);
+    background: rgba(255, 255, 240, 0.6);
+    padding: 2px 8px;
+    border-radius: 10px;
 }
 
 .page-front .page-number {
-    left: 15px;
+    left: 10px;
 }
 
 .page-back .page-number {
-    right: 15px;
+    right: 10px;
 }
 
 /* Content Styling */
 .cover-page {
-    height: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding-bottom: 40px;
 }
 
 .cover-page h1 {
@@ -156,7 +178,7 @@ h3 {
 }
 
 div.product-full-page {
-    height: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -171,6 +193,7 @@ div.product-full-page {
     border-radius: 12px;
     border: 1px solid var(--accent-color);
     width: 100%;
+    margin-top: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
@@ -189,8 +212,7 @@ div.product-full-page {
 
 .product-image {
     max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    height: auto;
     border-radius: 12px;
 }
 
