@@ -1,40 +1,27 @@
 :root {
     /* White Cream & Dark Green Theme */
     --primary-color: #1a472a;
-    /* Dark Green */
     --secondary-color: #2d5a3f;
-    /* Slightly lighter green */
     --accent-color: #c5e1a5;
-    /* Light Green Accent */
     --text-color: #0f2918;
-    /* Very Dark Green */
     --bg-color: #D4B996;
-    /* Creamy Peanut Butter Color */
-    /* Web Page Background - Clean White? Or Dark Green? User said "theme of the book". Let's do Web=White/Light, Book=Cream. */
-    /* Actually, "centralize the book... middle of web page" implies neutral background. Let's stick to light web bg. */
     --page-bg: #fffbf0;
-    /* Cream Color */
 
+    /* Base Book Dimensions (Scaled by JS on small screens) */
     --book-width: 500px;
-    /* Adjusted ratio */
     --book-height: 800px;
-    /* Taller to fit vertical ingredient lists/photos */
     --transition-speed: 1.2s;
-    /* Slower, smoother flip */
 }
 
-/* Global Box Sizing Fix */
+/* Global Box Sizing */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
 
-
 body {
-    /* Rich Radial Gradient Spotlight Effect */
     background: radial-gradient(circle at center, #E6D5B8 0%, #D4B996 50%, #8C7355 100%);
-    /* Fallback */
     background-color: var(--bg-color);
     font-family: 'Cairo', sans-serif;
     color: var(--text-color);
@@ -42,22 +29,20 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* overflow: hidden; Removed to allow scrolling if needed on small screens, though we prefer fixed */
-    overflow: hidden;
-    /* Ensure book is perfectly centered */
+    margin: 0;
+    overflow-x: hidden;
     width: 100vw;
 }
 
 .book-container {
+    padding: 40px 20px;
     position: relative;
-    perspective: 2000px;
-    /* Essential for 3D effect */
+    perspective: 2500px;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Add logic to center physically if needed, usually flex body does it */
-    transform: translateX(250px);
-    /* Adjusted 150px left (Total 250px) */
+    transform-origin: center center;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .book {
@@ -68,38 +53,6 @@ body {
     transition: transform var(--transition-speed);
 }
 
-.controls {
-    display: none;
-    /* User requested removal */
-}
-
-button {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, background 0.2s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-button:hover {
-    background: var(--secondary-color);
-    transform: scale(1.15);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-}
-
-button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
-}
-
 /* Page Styling */
 .page {
     position: absolute;
@@ -108,57 +61,25 @@ button:disabled {
     background-color: var(--page-bg);
     top: 0;
     right: 0;
-    /* Align to spine */
     transform-origin: left center;
-    /* Flip from the left spine */
     transform-style: preserve-3d;
     transition: transform var(--transition-speed) cubic-bezier(0.25, 1, 0.5, 1);
-    /* Realistic "Soft" paper finish */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     border-radius: 5px 15px 15px 5px;
-    /* Round outer corners */
-    display: flex;
-    flex-direction: column;
 }
 
-/* Page States */
 .page.flipped {
     transform: rotateY(-180deg);
 }
 
-.page.z-1 {
-    z-index: 1;
-}
-
-.page.z-2 {
-    z-index: 2;
-}
-
-.page.z-3 {
-    z-index: 3;
-}
-
-.page.z-4 {
-    z-index: 4;
-}
-
-.page.z-5 {
-    z-index: 5;
-}
-
-/* Add more z-indexes via JS dynamics usually, but simple CSS helps initial stack */
-
-/* Front and Back of the page */
 .page-front,
 .page-back {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    /* Hide back when facing away */
     padding: 30px;
     overflow-y: auto;
-    /* Allow content scrolling if too long */
     display: flex;
     flex-direction: column;
 }
@@ -167,114 +88,64 @@ button:disabled {
     background-image: url('assets/Pal.jpg');
     background-size: cover;
     background-position: center;
-    border-right: 1px solid #eee;
-    /* Spine detail */
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
-
-/* Spine detail */
-
-
-/* Force removal of texture (Cover, Instagram) */
-.no-texture {
-    background-image: none !important;
-    background: white !important;
-    /* Fallback base */
-    /* If it has other background set (like instagram-page's photo), that will override 'white' via z-index or child? */
-    /* Wait, .page-front has background-image. instagram-page is a CHILD. */
-    /* If .page-front has NO image, child can show its own. */
-    /* If .page-front HAS image, it sits BEHIND child. */
-    /* BUT Pal.jpg covers everything. */
-    /* So .no-texture REMOVES Pal.jpg from parent. Child's background (photo) then shows. Good. */
-}
-
-/* Redundant IDs removed */
 
 .page-back {
     background-image: url('assets/Pal.jpg');
     background-size: cover;
     background-position: center;
     transform: rotateY(180deg);
-    border-left: 1px solid #eee;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.no-texture {
+    background-image: none !important;
+    background: white !important;
 }
 
 .page-number {
     position: absolute;
-    bottom: 20px;
-    font-size: 16px;
-    /* Larger */
+    bottom: 15px;
+    font-size: 14px;
     font-weight: bold;
     color: var(--primary-color);
-    /* Match theme */
-    z-index: 10;
 }
 
 .page-front .page-number {
-    left: 20px;
+    left: 15px;
 }
 
 .page-back .page-number {
-    right: 20px;
+    right: 15px;
 }
 
-
 /* Content Styling */
-/* Redesigned Cover Page */
 .cover-page {
-    text-align: center;
-    background: none;
-    /* Removed gradient "shade" */
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Sophisticated Frame: Outer Green, Inner spacing, Inner Thin Line */
-    /* Sophisticated Frame REMOVED */
-    border: none;
-    box-shadow: none;
-    z-index: 5;
-    padding: 40px;
+    text-align: center;
 }
 
 .cover-page h1 {
     font-size: 3.5rem;
     margin-top: 20px;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-    font-weight: 800;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
     color: #000;
-    /* Requested Black */
-}
-
-.cover-page p {
-    font-size: 1.5rem;
-    color: #000;
-    /* Requested Black */
-    letter-spacing: 1px;
 }
 
 .logo {
     max-width: 220px;
-    /* Slightly larger */
-    margin-bottom: 20px;
     border-radius: 50%;
-    box-shadow: none !important;
-    filter: none !important;
 }
 
 h1,
 h2,
 h3 {
     font-family: 'Amiri', serif;
-    /* Classic Arabic Headings */
-    margin-bottom: 0.5em;
     color: var(--primary-color);
-}
-
-p {
-    line-height: 1.8;
-    margin-bottom: 1.2em;
-    font-size: 1.1rem;
 }
 
 div.product-full-page {
@@ -287,209 +158,72 @@ div.product-full-page {
     text-align: center;
 }
 
-/* Text Page Styling */
-.text-side {
-    background-color: transparent;
-    /* Transparent to show Pal.jpg */
-}
-
 .product-table-view {
-    margin-top: 15px;
     background: #fff;
     padding: 20px;
     border-radius: 12px;
     border: 1px solid var(--accent-color);
-    width: 90%;
+    width: 100%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.product-table-view h2 {
-    border-bottom: 2px solid var(--secondary-color);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
 }
 
 .product-table-view ul {
     list-style: none;
     padding: 0;
-}
-
-.product-table-view li {
-    padding: 8px 0;
-    border-bottom: 1px dashed #eee;
-    font-weight: 600;
-    color: var(--primary-color);
-}
-
-.table-container {
-    margin-top: 20px;
-    width: 100%;
-    border-top: 2px solid #eee;
-    padding-top: 10px;
+    text-align: right;
 }
 
 .nutrition-table {
-    width: 75%;
-    /* Smaller as requested */
-    margin: 0 auto;
-    /* Center it */
-    height: auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 15px auto 0;
     border-radius: 8px;
-    display: block;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.intro-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.intro-footer {
-    margin-top: auto;
-    /* Pushes to bottom in flex container */
-    padding-bottom: 20px;
-    font-weight: normal;
-    /* Ensuring not bold */
-    color: var(--primary-color);
-    text-align: center;
-    width: 100%;
-}
-
-/* Page 3 Special Background */
 .page-3-background {
     background-image: url('assets/background_page3.jpeg') !important;
     background-size: cover;
-    background-position: center;
     color: white;
-    /* Ensure text is visible if any */
-}
-
-/* Make sure text on Page 3 is readable against background */
-.page-3-background h1,
-.page-3-background p {
-    color: white;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-}
-
-/* Image Page Styling */
-.image-side {
-    background-color: transparent;
-    /* Transparent to show Pal.jpg */
-    /* Or a subtle pattern */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-.product-image-container {
-    width: 90%;
-    height: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
 }
 
 .product-image {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
-    /* Full view, no crop */
-    border-radius: 12px;
-    box-shadow: none;
-    /* Cleaner look for plain photos */
-}
-
-/* No masking or special shapes anymore */
-.product-image.circle-crop {
     border-radius: 12px;
 }
 
-/* Page 3 Special (Spoon) */
-.spoon-highlight {
-    object-fit: cover;
-    border-radius: 15px;
-}
-
-/* Instagram Page */
 .instagram-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-    /* Solid base */
     background-image: url('assets/background_page3.jpeg') !important;
     background-size: cover;
-    background-position: center;
-    z-index: 5;
-    /* Ensure coverage */
+    color: white;
 }
 
 .insta-code {
-    width: 80%;
-    max-width: 300px;
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    border: 4px solid var(--primary-color);
-    /* Green Border */
+    width: 200px;
+    background: white;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    /* Semi-transparent backing for code */
+    border-radius: 12px;
 }
 
-.instagram-page h2 {
-    color: white;
-    /* White text for contrast against photo */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-    font-size: 2rem;
-    margin-top: 10px;
+/* Responsive Overrides (Handled by JS Scale, but providing fallback baselines) */
+@media (max-width: 1024px) {
+    :root {
+        --book-width: 450px;
+        --book-height: 700px;
+    }
 }
 
-@media (max-width: 850px) {
-
-    /* Mobile/Tablet view: Switch to simple stack or single view if 3D is too much */
-    .book-container {
-        perspective: none;
-        height: auto;
+@media (max-width: 768px) {
+    :root {
+        --book-width: 380px;
+        --book-height: 600px;
     }
+}
 
-    .book {
-        width: 90vw;
-        height: auto;
-        min-height: 80vh;
-        transform: none;
-    }
-
-    .page {
-        position: relative;
-        transform: none !important;
-        margin-bottom: 20px;
-        opacity: 1;
-        width: 100%;
-        display: none;
-        /* JS will toggle active class */
-    }
-
-    .page.active-mobile {
-        display: flex;
-    }
-
-    .page-front,
-    .page-back {
-        position: relative;
-        transform: none;
-        height: auto;
-        min-height: 400px;
-        display: block;
-        /* Show both sides sequentially on mobile? or just handle as distinct slides */
-    }
-
-    /* Simplified mobile flow: Treat Front/Back as separate slides in JS logic */
+/* Hide navigation buttons as interaction is tap-based */
+.controls,
+button {
+    display: none !important;
 }
