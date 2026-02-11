@@ -112,9 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             sheet.addEventListener('click', (e) => {
                 const rect = sheet.getBoundingClientRect();
-                // When rotated 90deg: 
-                // X (side to side) is actually vertical? No, rotate(90deg) rotates the坐标系 too.
-                // Let's rely on simple turn logic for now.
                 const allSheets = Array.from(document.querySelectorAll('.page'));
                 const myIndex = allSheets.indexOf(sheet);
 
@@ -131,11 +128,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateCover(data) {
-        return `<div class="cover-page"><img src="${data.image}" class="logo"><h1>${data.title}</h1><p>${data.subtitle}</p></div>`;
+        return `<div class="cover-page">
+                    <img src="${data.image}" class="logo">
+                    <h1>${data.title}</h1>
+                    <p>${data.subtitle}</p>
+                    <p>${data.footer}</p>
+                </div>`;
     }
 
     function generateIntro(data) {
-        return `<div class="product-full-page text-side"><h2>${data.title}</h2><p>${data.text}</p></div>`;
+        return `<div class="product-full-page text-side">
+        <h2>${data.title}</h2>
+        <p>${data.text}</p>
+        <p>${data.footer}</p>
+        </div>`;
     }
 
     function generatePhotoPage(data) {
@@ -147,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateMessagePage(data) {
-        return `<div class="product-full-page text-side"><h2>${data.title}</h2><p>${data.text}</p><img src="${data.image}" style="max-width:90%; border-radius:10px;"></div>`;
+        return `<div class="product-full-page text-side"><h2>${data.title}</h2><p>${data.text}</p><img src="${data.image}" style="max-width:60%; border-radius:10px;"></div>`;
     }
 
     function generateInstagramPage() {
@@ -155,7 +161,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateLocationsPage(data) {
-        return `<div class="product-full-page text-side"><h2>${data.title}</h2><ul style="list-style:none; padding:0;">${data.points.map(p => `<li>${p}</li>`).join('')}</ul></div>`;
+        return `<div class="product-full-page text-side">
+        <h2>${data.title}</h2>
+        <ul style="list-style:none; padding:0;">${data.points.map(p => `<li>${p}</li>`).join('')}</ul>
+        <p>${data.footer}</p>
+        </div>`;
     }
 
     function updateZIndexes() {
