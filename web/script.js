@@ -33,11 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const bookHeight = parseInt(style.getPropertyValue('--book-height'));
 
             if (isMobile) {
-                // FIT TO PHONE WIDTH (Constraint is width because book is rotated)
+                // STABLE MOBILE ROTATION & SCALE
                 const scale = (window.innerWidth * 0.94) / bookHeight;
 
-                // Ensure perfect centering with the fixed container
-                container.style.transform = `translate(-50%, -50%) rotate(90deg) scale(${scale})`;
+                container.style.transform = `rotate(90deg) scale(${scale})`;
             } else {
                 // Desktop Regular
                 const totalWidthRequired = bookWidth * 2.1;

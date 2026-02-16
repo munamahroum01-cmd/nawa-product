@@ -53,17 +53,16 @@ body {
 }
 
 .book-container {
-    padding: 0;
     position: relative;
-    perspective: 1500px;
-    /* Reduced for Safari stability */
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    transform-origin: center center;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 100%;
-    height: 100%;
+    perspective: 1500px;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 100;
 }
 
 .book {
