@@ -105,9 +105,11 @@ body {
     -webkit-backface-visibility: hidden !important;
     /* CRITICAL FOR SAFARI */
     padding: 60px 45px;
-    backface-visibility: hidden !important;
-    -webkit-backface-visibility: hidden !important;
-    transform: translateZ(0);
+    backface-visibility: visible !important;
+    /* EMERGENCY FIX: Stop mobile glitching */
+    -webkit-backface-visibility: visible !important;
+    transform: translateZ(10px);
+    /* FORCE GPU ALWAYS */
     transform-style: preserve-3d;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -334,8 +336,8 @@ div.product-full-page>*:last-child {
     width: 150px;
     height: 150px;
     object-fit: contain;
-    /* Recolor to #4a342c (PRECise match for palette) */
-    filter: invert(21%) sepia(21%) saturate(1450%) hue-rotate(345deg) brightness(85%) contrast(100%);
+    /* EXACT RECOLOR to #4a342c (Matched brown palette) */
+    filter: invert(19%) sepia(18%) saturate(1200%) hue-rotate(345deg) brightness(95%) contrast(90%);
     mix-blend-mode: normal;
 }
 

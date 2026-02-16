@@ -225,8 +225,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <img src="assets/instagram_new.png" class="insta-qr-img" style="width: 150px; height: 150px;">
                         </div>
                         <div class="insta-text-box" style="margin-top: 5px; background: rgba(255,255,255,0.7); padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(74, 52, 44, 0.2);">
-                            <h2 style="margin: 0; font-size: 1rem; font-weight: 700; color: #4a342c; font-family: 'Cairo', sans-serif !important;">Follow us on Instagram</h2>
-                            <p style="margin: 3px 0 0; color: #4a342c; opacity: 0.9; font-weight: 600; font-size: 0.8rem;">@nawa.ps</p>
+                            <h2 style="margin: 0; font-size: 1rem; font-weight: 700; color: #4a342c !important; font-family: 'Cairo', sans-serif !important;">Follow us on Instagram</h2>
+                            <p style="margin: 3px 0 0; color: #4a342c !important; opacity: 1; font-weight: 700; font-size: 0.8rem;">@nawa.ps</p>
                         </div>
                     </div>
                 </div>`;
