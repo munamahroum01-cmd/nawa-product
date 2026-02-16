@@ -338,8 +338,8 @@ div.product-full-page>*:last-child {
     width: 150px;
     height: 150px;
     object-fit: contain;
-    /* PURE WHITE RECOLOR */
-    filter: brightness(0) invert(1) !important;
+    /* REMOVED FILTER - Preserving original image details */
+    filter: none !important;
     mix-blend-mode: normal;
 }
 
