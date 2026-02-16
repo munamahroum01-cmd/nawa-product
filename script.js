@@ -111,12 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const contentPages = [];
 
         contentPages.push(generateCover(bookData[0])); // Page 1
-        contentPages.push(generateIntro(bookData[1])); // Page 2
-
+        contentPages.push(generateIntro(bookData[1]));        // P3: Collection Header
         contentPages.push(`<div class="product-full-page" style="justify-content: center; height: 100%;">
-            <h1 style="font-family: 'Amiri', serif; font-size: 2.5rem; margin-bottom: 5px;">مجموعتنا</h1>
-            <p style="font-size: 1.1rem; color: var(--primary-color);">طبيعي وعضوي 100%</p>
-        </div>`); // Page 3
+            <h1 style="font-family: 'Amiri', serif; font-size: 2.8rem; margin-bottom: 10px; color: #1a472a;">Our Products</h1>
+            <p style="font-size: 1.2rem; color: #2d5a3f; letter-spacing: 1px;">Natural & Organic</p>
+        </div>`);
+        // Page 3
 
         const products = bookData.filter(i => i.type === 'product');
         products.forEach(p => {
@@ -146,11 +146,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // P3 Background (Intro page back / page 3)
             let frontClass = "page-front";
-            if (i === 2) frontClass += " page-3-background no-texture";
+            // if (i === 2) frontClass += " page-3-background no-texture"; // This was for page 3 front
+
+            // P2 Background (Back of cover / first sheet back)
+            let backClass = "page-back";
+            if (i === 0) backClass += " page-2-background no-texture";
 
             sheet.innerHTML = `
-                <div class="${frontClass}">${frontHTML}<div class="page-number">${i + 1}</div></div>
-                <div class="page-back">${backHTML}<div class="page-number">${i + 2}</div></div>
+                <div class="page-front">${frontHTML}<div class="page-number">${i + 1}</div></div>
+                <div class="${backClass}">${backHTML}<div class="page-number">${i + 2}</div></div>
             `;
 
             sheet.addEventListener('click', () => {
@@ -175,11 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateIntro(data) {
-        return `<div class="product-full-page text-side" style="padding: 40px 20px;">
-                    <h2 style="font-family: 'Amiri', serif; font-size: 2.8rem; margin-bottom: 30px;">${data.title}</h2>
-                    <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-color);">${data.text}</p>
+        return `<div class="product-full-page text-side" style="padding: 40px 25px;">
+                    <h2 style="font-family: 'Amiri', serif; font-size: 3rem; margin-bottom: 30px;">${data.title}</h2>
+                    <p style="font-size: 1.2rem; line-height: 1.7; color: inherit; font-weight: 400;">${data.text}</p>
                     <div style="margin-top: auto; padding-top: 50px;">
-                        <p style="font-size: 1rem; color: var(--primary-color); font-weight: 700; border-top: 2px solid var(--accent-color); pt: 15px;">
+                        <p style="font-size: 1rem; opacity: 0.9; font-weight: 400; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 15px;">
                             مناسبة للأطفال، للرياضيين، لمرضى السكري، وللجميع!
                         </p>
                     </div>
