@@ -124,6 +124,13 @@ document.addEventListener('DOMContentLoaded', () => {
             contentPages.push(generateDescPage(p));
         });
 
+        // P24: Message Page (Special Request)
+        contentPages.push(generateMessagePage({
+            title: "طلب خاص؟",
+            text: "منتجاتنا كتيرة, بس مع هيك ما عنا مشكلة نعملكم منتج معين بناءا على طلبكم!<br>لهيك ما تترددوا تحكوا معنا اذا في طعم معين ببالكم",
+            image: "assets/productsss.png"
+        }));
+
         // P25: Locations Page
         const locationsData = bookData.find(i => i.type === 'locations');
         if (locationsData) contentPages.push(generateLocationsPage(locationsData));
@@ -217,9 +224,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="insta-qr-container">
                             <img src="assets/instagram_new.png" class="insta-qr-img">
                         </div>
-                        <div class="insta-text-box" style="margin-top: -5px; background: transparent; padding: 0; box-shadow: none; border: none;">
-                            <h2 style="margin: 0; font-size: 0.75rem; font-weight: 700; color: #1a472a; font-family: 'Cairo', sans-serif !important;">Follow us on Instagram</h2>
-                            <p style="margin: 2px 0 0; color: #1a472a; opacity: 0.8; font-weight: 600; font-size: 0.65rem;">@nawa.ps</p>
+                        <div class="insta-text-box" style="margin-top: 5px; background: rgba(255,255,255,0.7); padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(26, 71, 42, 0.1);">
+                            <h2 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: #1a472a; font-family: 'Cairo', sans-serif !important;">Follow us on Instagram</h2>
+                            <p style="margin: 3px 0 0; color: #1a472a; opacity: 0.9; font-weight: 600; font-size: 0.85rem;">@nawa.ps</p>
                         </div>
                     </div>
                 </div>`;
