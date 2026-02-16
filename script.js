@@ -178,11 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateIntro(data) {
-        return `<div class="product-full-page text-side page-2-background no-texture" style="padding-top: 50px;">
-                    <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 2.22rem;">${data.title}</h2>
-                    <p style="margin-top: 5px; font-size: 0.98rem; line-height: 1.6; opacity: 0.9;">${data.text}</p>
+        return `<div class="product-full-page text-side" style="padding-top: 50px;">
+                    <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 2.22rem; color: var(--primary-color) !important;">${data.title}</h2>
+                    <p style="margin-top: 5px; font-size: 1rem; line-height: 1.6; color: var(--text-color) !important;">${data.text}</p>
                     <div style="margin-top: auto; padding-bottom: 30px;">
-                        <p style="font-size: 0.78rem; font-weight: 500; color: white;">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
+                        <p style="font-size: 0.8rem; font-weight: 700; color: var(--primary-color) !important; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px;">
+                            مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!
+                        </p>
                     </div>
                 </div>`;
     }
