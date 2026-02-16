@@ -135,19 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const locationsData = bookData.find(i => i.type === 'locations');
         if (locationsData) contentPages.push(generateLocationsPage(locationsData));
 
-        // P26: Instagram Page
+        // P26: Instagram Page (Last Page)
         contentPages.push(generateInstagramPage());
-
-        // P27: Final Back Cover
-        contentPages.push(`<div class="cover-page" style="justify-content: center; height: 100%;">
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <img src="assets/logo.jpeg" class="logo" style="width: 120px; margin-bottom: 20px;">
-                        <div class="insta-qr-container">
-                             <img src="assets/instagram_new.png" class="insta-qr-img" style="width: 120px; height: 120px;">
-                        </div>
-                        <p style="color: var(--primary-color); font-weight: 700; margin-top: 10px;">@nawa.ps</p>
-                    </div>
-                </div>`);
 
         for (let i = 0; i < contentPages.length; i += 2) {
             const frontHTML = contentPages[i];
@@ -195,10 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generateIntro(data) {
         return `<div class="product-full-page text-side" style="padding-top: 50px;">
-                    <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 2.22rem; color: var(--primary-color) !important;">${data.title}</h2>
+                    <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 2.2rem; color: var(--primary-color) !important;">${data.title}</h2>
                     <p style="margin-top: 5px; font-size: 1rem; line-height: 1.6; color: var(--text-color) !important;">${data.text}</p>
                     <div style="margin-top: auto; padding-bottom: 30px;">
-                        <p style="font-size: 0.8rem; font-weight: 400; color: var(--primary-color) !important; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px;">
+                        <p style="font-size: 0.82rem; font-weight: 400; color: var(--primary-color) !important; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px;">
                             مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!
                         </p>
                     </div>
@@ -282,8 +271,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const sheets = document.querySelectorAll('.page');
         if (currentPage > 0) {
             currentPage--;
+            sheets[currentPage].style.zIndex = 100; // Force to top during transition
             sheets[currentPage].classList.remove('flipped');
-            updateZIndexes();
+            setTimeout(updateZIndexes, 300); // Wait for transition start
             flipSound.currentTime = 0;
             flipSound.play().catch(e => { });
         }
