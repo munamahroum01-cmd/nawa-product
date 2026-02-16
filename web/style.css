@@ -387,12 +387,9 @@ div.product-full-page>*:last-child {
 
     .page-front,
     .page-back {
-        padding: 65px 52px !important;
-        /* GREATER PADDING FOR CONTAINMENT */
+        padding: 55px 35px !important;
         overflow-x: hidden !important;
         box-sizing: border-box !important;
-        transform: none !important;
-        /* Force stability on mobile */
     }
 
     /* Contain images on mobile */
