@@ -10,7 +10,8 @@
     /* Base Book Dimensions - FIXED (Scaled by JS on small screens) */
     --book-width: 450px;
     --book-height: 700px;
-    --transition-speed: 1.2s;
+    --transition-speed: 0.8s;
+    /* Faster transition for better feel */
 }
 
 /* Global Box Sizing */
@@ -30,7 +31,7 @@ body {
 }
 
 body {
-    background: radial-gradient(circle at center, #E6D5B8 0%, #D4B996 50%, #8C7355 100%);
+    background: radial-gradient(circle at center, #f5ecd8 0%, #D4B996 50%, #8C7355 100%);
     background-color: var(--bg-color);
     font-family: 'Cairo', sans-serif;
     color: var(--text-color);
@@ -38,17 +39,29 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    overflow: hidden;
+    /* Prevent body scroll while using the book */
+}
+
+/* Background Decorations (Nuts) */
+.nut-decoration {
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.6;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
 }
 
 .book-container {
     padding: 0;
     position: relative;
-    perspective: 2500px;
+    perspective: 1500px;
+    /* Reduced for Safari stability */
     display: flex;
     justify-content: center;
     align-items: center;
     transform-origin: center center;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
     height: 100%;
 }
@@ -214,13 +227,29 @@ div.product-full-page>*:last-child {
 
 .product-table-view {
     background: transparent;
-    /* Changed from white to transparent */
     padding: 0;
-    /* Removed padding since there's no background box anymore */
     border: none;
     width: 100%;
     margin: 15px 0;
     box-shadow: none;
+    color: var(--text-color);
+}
+
+.product-table-view ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px auto;
+    font-weight: bold;
+    /* Bold ingredients */
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.product-full-page p {
+    font-weight: bold;
+    /* Make descriptions bolder for readability */
+    font-size: 1rem;
+    padding: 0 10px;
 }
 
 .nutrition-table {
@@ -256,8 +285,12 @@ div.product-full-page>*:last-child {
 
 .instagram-page {
     background-image: url('assets/photo.jpeg') !important;
-    background-size: cover;
-    background-position: center;
+    background-size: 100% 100% !important;
+    /* Force full size fitting the container exactly */
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    filter: none !important;
+    /* Ensure no blur */
     color: white;
 }
 

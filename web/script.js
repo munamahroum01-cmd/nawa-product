@@ -33,15 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const bookHeight = parseInt(style.getPropertyValue('--book-height'));
 
             if (isMobile) {
-                // FORCE HORIZONTAL via Rotation + Scale
-                const totalWidthRequired = bookHeight * 1.1;
-                const availableWidthForScaledHeight = window.innerWidth * 0.95;
-                const scale = availableWidthForScaledHeight / totalWidthRequired;
+                // More stable scaling to prevent crashes
+                const totalWidthRequired = bookHeight * 1.05;
+                const availableWidthForScaledHeight = window.innerWidth * 0.98;
+                const scale = Math.min(availableWidthForScaledHeight / totalWidthRequired, 1.3);
 
                 container.style.transform = `rotate(90deg) scale(${scale})`;
             } else {
                 // Desktop Regular
-                const totalWidthRequired = bookWidth * 2.2;
+                const totalWidthRequired = bookWidth * 2.1;
                 const availableWidth = window.innerWidth * 0.95;
                 if (availableWidth < totalWidthRequired) {
                     const scale = availableWidth / totalWidthRequired;
@@ -114,6 +114,34 @@ document.addEventListener('DOMContentLoaded', () => {
         return el;
     }
 
+    function addBackgroundDecorations() {
+        const nutImages = [
+            'assets/almond_ingredients.png',
+            'assets/cashew_table.png',
+            'assets/macadamia_ingredients.png',
+            'assets/peanut_ingredients.jpeg'
+        ];
+
+        for (let i = 0; i < 12; i++) {
+            const nut = document.createElement('img');
+            nut.className = 'nut-decoration';
+            nut.src = nutImages[Math.floor(Math.random() * nutImages.length)];
+
+            // Random position
+            nut.style.left = Math.random() * 100 + 'vw';
+            nut.style.top = Math.random() * 100 + 'vh';
+
+            // Random size
+            const size = Math.random() * 40 + 30;
+            nut.style.width = size + 'px';
+
+            // Random rotation
+            nut.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+            document.body.appendChild(nut);
+        }
+    }
+
     function renderBook() {
         book.innerHTML = '';
         const contentPages = [];
@@ -175,7 +203,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateCover(data) {
-        return `<div class="cover-page"><img src="${data.image}" class="logo"><h1>${data.title}</h1><p>${data.subtitle}</p></div>`;
+        return `<div class="cover-page">
+                    <img src="${data.image}" class="logo">
+                    <h1 style="font-size: ${isMobile ? '2.2rem' : '3.2rem'}; margin-top: 20px;">${data.title}</h1>
+                    <p style="font-size: 1.2rem; opacity: 0.9;">${data.subtitle}</p>
+                </div>`;
     }
 
     function generateIntro(data) {
@@ -212,17 +244,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateMessagePage(data) {
         return `<div class="product-full-page text-side">
         <h2>${data.title}</h2>
-        <p>${data.text}</p>
-        <div style="padding: 10px; display: flex; justify-content: center;">
-            <img src="${data.image}" style="max-width:65%; max-height: 350px; object-fit: contain; border-radius:10px;">
+        <p style="padding: 0 15px;">${data.text}</p>
+        <div style="padding: 25px; display: flex; justify-content: center; width: 100%;">
+            <img src="${data.image}" style="max-width: 80%; max-height: 250px; object-fit: contain; border-radius: 12px; box-shadow: none;">
         </div>
         </div>`;
     }
 
     function generateInstagramPage() {
-        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center;">
-                    <img src="assets/instagram_new.png" style="width: 200px; border-radius: 12px; transform: scale(1); background: transparent;">
-                    <h2 style="color: white; margin-top: 20px; text-shadow: 0 2px 5px rgba(0,0,0,0.8);">Add us on Instagram!</h2>
+        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center; padding: 0 !important;">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: center;">
+                        <img src="assets/instagram_new.png" style="width: 220px; border-radius: 15px; background: transparent; transition: transform 0.3s;">
+                        <h2 style="color: white; margin-top: 20px; text-shadow: 0 2px 10px rgba(0,0,0,1); font-size: 1.6rem; font-weight: bold;">Add us on Instagram!</h2>
+                    </div>
                 </div>`;
     }
 
@@ -267,4 +301,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     preloadAssets();
     renderBook();
+    addBackgroundDecorations();
 });
