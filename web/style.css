@@ -106,11 +106,10 @@ body {
     /* CRITICAL FOR SAFARI */
     padding: 60px 45px;
     backface-visibility: visible !important;
-    /* FIXED: Prevents mid-flip blanking */
     -webkit-backface-visibility: visible !important;
-    transform: translateZ(1px);
-    /* Force GPU Layering */
-    /* Cache GPU */
+    transform: translateZ(10px);
+    /* Lift significantly to force rendering */
+    transform-style: preserve-3d;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: flex;
