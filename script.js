@@ -1,6 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("Nawa Interactive Book Initializing...");
     const book = document.getElementById('book');
     const container = document.querySelector('.book-container');
+
+    if (!book || !container) {
+        console.error("Book or Container not found!");
+        return;
+    }
 
     let currentPage = 0;
     let isMobile = window.innerWidth <= 768;
@@ -15,10 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'assets/productsss.png',
             'assets/Map.jpg'
         ];
-        bookData.forEach(item => {
-            if (item.image) imagesToPreload.push(item.image);
-            if (item.tableImage) imagesToPreload.push(item.tableImage);
-        });
+        if (typeof bookData !== 'undefined') {
+            bookData.forEach(item => {
+                if (item.image) imagesToPreload.push(item.image);
+                if (item.tableImage) imagesToPreload.push(item.tableImage);
+            });
+        }
         imagesToPreload.forEach(src => {
             const img = new Image();
             img.src = src;
@@ -27,28 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function checkMobile() {
         isMobile = window.innerWidth <= 768;
-        if (container && book) {
-            const style = getComputedStyle(document.documentElement);
-            const bookWidth = parseInt(style.getPropertyValue('--book-width'));
-            const bookHeight = parseInt(style.getPropertyValue('--book-height'));
+        const style = getComputedStyle(document.documentElement);
+        const bookWidth = parseInt(style.getPropertyValue('--book-width')) || 450;
+        const bookHeight = parseInt(style.getPropertyValue('--book-height')) || 700;
 
-            if (isMobile) {
-                // STABLE MOBILE ROTATION
-                const scale = (window.innerWidth * 0.94) / bookHeight;
-                book.style.transform = `rotate(90deg) scale(${scale})`;
-                container.style.transform = 'none';
+        if (isMobile) {
+            const scale = (window.innerWidth * 0.94) / bookHeight;
+            book.style.transform = `rotate(90deg) scale(${scale})`;
+            container.style.transform = 'none';
+        } else {
+            const totalWidthRequired = bookWidth * 2.1;
+            const availableWidth = window.innerWidth * 0.95;
+            if (availableWidth < totalWidthRequired) {
+                const scale = availableWidth / totalWidthRequired;
+                container.style.transform = `translateX(${(bookWidth * scale) / 2}px) scale(${scale})`;
             } else {
-                // Desktop Regular
-                const totalWidthRequired = bookWidth * 2.1;
-                const availableWidth = window.innerWidth * 0.95;
-                if (availableWidth < totalWidthRequired) {
-                    const scale = availableWidth / totalWidthRequired;
-                    container.style.transform = `translateX(${(bookWidth * scale) / 2}px) scale(${scale})`;
-                } else {
-                    container.style.transform = `translateX(${bookWidth / 2}px) scale(1)`;
-                }
-                book.style.transform = 'none';
+                container.style.transform = `translateX(${bookWidth / 2}px) scale(1)`;
             }
+            book.style.transform = 'none';
         }
     }
 
@@ -99,18 +103,20 @@ document.addEventListener('DOMContentLoaded', () => {
     flipSound.volume = 0.5;
 
     function renderBook() {
-        if (!book) return;
+        if (typeof bookData === 'undefined') {
+            console.error("bookData is missing! Check data.js");
+            return;
+        }
         book.innerHTML = '';
         const contentPages = [];
 
-        contentPages.push(generateCover(bookData[0])); // P1: Cover
-        contentPages.push(generateIntro(bookData[1])); // P2: Intro
+        contentPages.push(generateCover(bookData[0])); // Page 1
+        contentPages.push(generateIntro(bookData[1])); // Page 2
 
-        // P3: Collection Header
         contentPages.push(`<div class="product-full-page" style="justify-content: center; height: 100%;">
             <h1 style="font-family: 'Amiri', serif; font-size: 2.5rem; margin-bottom: 5px;">مجموعتنا</h1>
             <p style="font-size: 1.1rem; color: var(--primary-color);">طبيعي وعضوي 100%</p>
-        </div>`);
+        </div>`); // Page 3
 
         const products = bookData.filter(i => i.type === 'product');
         products.forEach(p => {
@@ -119,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const locationsData = bookData.find(i => i.type === 'locations');
-        contentPages.push(generateLocationsPage(locationsData));
+        if (locationsData) contentPages.push(generateLocationsPage(locationsData));
 
         contentPages.push(generateMessagePage({
             title: "طلب خاص؟",
@@ -134,8 +140,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const backHTML = contentPages[i + 1] || `<div class="product-full-page instagram-page"><h2>Add us on Instagram!</h2></div>`;
 
             const sheet = createEl('div', 'page');
+
+            // Special Background for Page 3 (Intro back)
+            let frontClass = "page-front";
+            if (i === 2) frontClass += " page-3-background";
+
             sheet.innerHTML = `
-                <div class="page-front">${frontHTML}<div class="page-number">${i + 1}</div></div>
+                <div class="${frontClass}">${frontHTML}<div class="page-number">${i + 1}</div></div>
                 <div class="page-back">${backHTML}<div class="page-number">${i + 2}</div></div>
             `;
 
@@ -149,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         updateZIndexes();
         checkMobile();
+        console.log("Book Rendered with " + contentPages.length + " pages.");
     }
 
     function generateCover(data) {
@@ -171,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generatePhotoPage(data) {
         return `<div class="product-full-page image-side">
-                    <h2>${data.product}</h2>
+                    <h2 style="font-family: 'Amiri', serif;">${data.product}</h2>
                     <div class="product-image-container">
                         ${data.image ? `<img src="${data.image}" class="product-image">` : ""}
                     </div>
@@ -192,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generateMessagePage(data) {
         return `<div class="product-full-page text-side">
-        <h2>${data.title}</h2>
+        <h2 style="font-family: 'Amiri', serif;">${data.title}</h2>
         <p style="padding: 0 15px; font-size: 0.95rem;">${data.text}</p>
         <div style="padding: 25px; display: flex; justify-content: center; width: 100%;">
             <img src="${data.image}" style="max-width: 65%; max-height: 220px; object-fit: contain; border-radius: 12px; box-shadow: none;">
@@ -214,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateLocationsPage(data) {
         return `<div class="product-full-page text-side">
                     <img src="${data.image}" style="max-width: 95%;">
-                    <h2>${data.title}</h2>
+                    <h2 style="font-family: 'Amiri', serif;">${data.title}</h2>
                     <ul style="list-style: disc; padding-inline-start: 25px; margin: 15px auto; width: fit-content; text-align: start; font-size: 1.2rem; line-height: 1.8;">
                         ${data.points.map(p => `<li>${p}</li>`).join('')}
                     </ul>
