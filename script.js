@@ -224,9 +224,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center; background-image: url('assets/photo.jpeg') !important; background-size: cover !important; background-position: center !important;">
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; gap: 15px;">
                         <div class="insta-qr-container" style="background: transparent; padding: 0; margin: 0;">
-                            <img src="assets/nawa_instagram.png" class="insta-qr-img" style="width: 180px; height: 180px; filter: none !important;">
+                            <img src="assets/instagram_new.png" class="insta-qr-img" style="width: 180px; height: 180px;">
                         </div>
-                        <h2 style="margin: 0; font-size: 1.5rem; color: white !important; text-shadow: 0 2px 10px rgba(0,0,0,0.8); font-family: 'Amiri', serif;">Add us on Instagram!</h2>
+                        <h2 style="margin: 0; font-size: 1.6rem; color: white !important; text-shadow: 0 2px 12px rgba(0,0,0,0.9); font-family: 'Amiri', serif; font-weight: 700;">Add us on Instagram!</h2>
                     </div>
                 </div>`;
     }
@@ -261,13 +261,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function turnPrev() {
         const sheets = document.querySelectorAll('.page');
-        if (currentPage > 0) {
-            currentPage--;
-            sheets[currentPage].style.zIndex = 100; // Force to top during transition
-            sheets[currentPage].classList.remove('flipped');
-            setTimeout(updateZIndexes, 300); // Wait for transition start
-            flipSound.currentTime = 0;
-            flipSound.play().catch(e => { });
+        if (touchEndX - touchStartX > 0 || !isMobile) { // Swipe right or desktop
+            if (currentPage > 0) {
+                currentPage--;
+                sheets[currentPage].classList.remove('flipped');
+                updateZIndexes();
+                flipSound.currentTime = 0;
+                flipSound.play().catch(e => { });
+            }
         }
     }
 

@@ -339,7 +339,7 @@ div.product-full-page>*:last-child {
     height: 150px;
     object-fit: contain;
     /* PURE WHITE RECOLOR */
-    filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1) !important;
     mix-blend-mode: normal;
 }
 
