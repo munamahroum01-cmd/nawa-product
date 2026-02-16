@@ -178,11 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateIntro(data) {
-        return `<div class="product-full-page text-side">
-                    <h2 style="margin-top: 0; font-family: 'Amiri', serif;">${data.title}</h2>
-                    <p style="margin-top: -10px;">${data.text}</p>
-                    <div style="margin-top: auto; padding-top: 40px;">
-                        <p style="font-size: 0.8rem; color: var(--primary-color);">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
+        return `<div class="product-full-page text-side" style="padding-top: 80px;">
+                    <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 2.8rem;">${data.title}</h2>
+                    <p style="margin-top: 10px; font-size: 1.1rem; line-height: 1.6;">${data.text}</p>
+                    <div style="margin-top: auto; padding-bottom: 20px;">
+                        <p style="font-size: 0.85rem; color: var(--primary-color); opacity: 0.8;">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
                     </div>
                 </div>`;
     }
@@ -219,25 +219,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateInstagramPage() {
-        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center; background-image: url('assets/photo.jpeg') !important;">
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; background: rgba(255,255,255,0.15); backdrop-filter: blur(2px);">
-                        <div class="insta-qr-container">
+        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center;">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%;">
+                        <div class="insta-qr-container" style="background: rgba(255,255,255,0.7); box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                             <img src="assets/instagram_new.png" class="insta-qr-img">
                         </div>
-                        <div class="insta-text-box">
-                            <h2 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: #1a472a; font-family: 'Cairo', sans-serif !important;">Add us on Instagram!</h2>
-                            <p style="margin: 5px 0 0; color: #1a472a; opacity: 0.9; font-weight: 600; font-size: 0.9rem;">@nawa.ps</p>
+                        <div class="insta-text-box" style="margin-top: 15px; background: rgba(255,255,255,0.9); padding: 10px 25px;">
+                            <h2 style="margin: 0; font-size: 1.3rem; font-weight: 700; color: #1a472a; font-family: 'Cairo', sans-serif !important;">Add us on Instagram!</h2>
+                            <p style="margin: 3px 0 0; color: #1a472a; opacity: 0.9; font-weight: 600; font-size: 0.85rem;">@nawa.ps</p>
                         </div>
                     </div>
                 </div>`;
     }
 
     function generateLocationsPage(data) {
-        return `<div class="product-full-page text-side">
-                    <img src="${data.image}" style="max-width: 95%;">
-                    <h2 style="font-family: 'Amiri', serif;">${data.title}</h2>
-                    <ul style="list-style: disc; padding-inline-start: 25px; margin: 15px auto; width: fit-content; text-align: start; font-size: 1.2rem; line-height: 1.8;">
-                        ${data.points.map(p => `<li>${p}</li>`).join('')}
+        return `<div class="product-full-page text-side" style="padding-top: 30px;">
+                    <img src="${data.image}" style="max-width: 90%; max-height: 220px; object-fit: contain; border-radius: 10px;">
+                    <h2 style="font-family: 'Amiri', serif; font-size: 2.22rem; margin-top: 15px;">${data.title}</h2>
+                    <ul style="list-style: disc; padding-inline-start: 25px; margin: 5px auto; width: fit-content; text-align: start; font-size: 1.1rem; line-height: 1.6;">
+                        ${data.points.map(p => `<li style="margin-bottom: 2px;">${p}</li>`).join('')}
                     </ul>
                 </div>`;
     }

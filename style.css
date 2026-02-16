@@ -169,6 +169,11 @@ body {
     left: 20px;
 }
 
+/* Hide number on Cover Page (Sheet 0 Front) */
+.page:first-child .page-front .page-number {
+    display: none !important;
+}
+
 /* Content Styling */
 .cover-page {
     min-height: 100%;
@@ -244,9 +249,11 @@ div.product-full-page>*:last-child {
 .product-table-view ul {
     list-style: none;
     padding: 0;
-    margin: 10px auto;
-    font-size: 1.1rem;
-    line-height: 1.6;
+    margin: 5px auto;
+    font-size: 0.95rem;
+    /* Neat and clean */
+    line-height: 1.5;
+    color: var(--primary-color);
 }
 
 .product-full-page p {
@@ -259,23 +266,29 @@ div.product-full-page>*:last-child {
 
 .nutrition-table {
     width: 100%;
-    max-width: 250px;
-    margin: 10px auto;
-    /* Ensure margin top and bottom for spacing */
-    border-radius: 8px;
+    max-width: 280px;
+    /* Enlarged but contained */
+    margin: 15px auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    /* Premium shadow */
+    background: white;
 }
 
 .page-3-background {
     background-image: url('assets/photo.jpeg') !important;
-    background-size: cover;
-    background-position: center;
+    background-size: cover !important;
+    background-position: center !important;
+    filter: none !important;
+    /* Ensure NO blur */
     color: white !important;
 }
 
 .page-3-background h1,
 .page-3-background p {
     color: white !important;
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9);
+    /* Sharper text contrast */
 }
 
 .product-image {
@@ -297,12 +310,11 @@ div.product-full-page>*:last-child {
 
 .instagram-page {
     background-image: url('assets/photo.jpeg') !important;
-    background-size: 100% 100% !important;
+    background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    filter: none !important;
-    color: var(--primary-color);
     padding: 0 !important;
+    filter: none !important;
 }
 
 .insta-qr-container {
@@ -316,13 +328,11 @@ div.product-full-page>*:last-child {
 }
 
 .insta-qr-img {
-    width: 200px;
-    /* Bigger QR */
-    height: 200px;
+    width: 210px;
+    height: 210px;
     object-fit: contain;
-    mix-blend-mode: multiply;
-    /* Make it "see-through" to the background */
-    filter: contrast(1.2) brightness(1.1);
+    /* Recolor to #1a472a using filters */
+    filter: invert(21%) sepia(19%) saturate(1455%) hue-rotate(90deg) brightness(85%) contrast(100%);
 }
 
 .insta-text-box {
@@ -374,17 +384,21 @@ div.product-full-page>*:last-child {
 
     .page-front,
     .page-back {
-        padding: 50px 30px !important;
-        /* CONTAINMENT: Ensure no overflow */
-        overflow-x: hidden;
-        box-sizing: border-box;
+        padding: 55px 40px !important;
+        /* CONTAINMENT BOOTS: Absolute force */
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
     }
 
     /* Contain images on mobile */
     .product-image {
-        max-width: 90% !important;
-        max-height: 160px !important;
-        margin: 5px auto;
+        max-width: 85% !important;
+        max-height: 150px !important;
+        margin: 10px auto;
+    }
+
+    .nutrition-table {
+        max-width: 92% !important;
     }
 
     .product-full-page p {
