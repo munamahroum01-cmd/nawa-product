@@ -124,15 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
             contentPages.push(generateDescPage(p));
         });
 
-        const locationsData = bookData.find(i => i.type === 'locations');
-        if (locationsData) contentPages.push(generateLocationsPage(locationsData));
-
+        // P24: Message Page (Special Request)
         contentPages.push(generateMessagePage({
             title: "طلب خاص؟",
             text: "منتجاتنا كتيرة, بس مع هيك ما عنا مشكلة نعملكم منتج معين بناءا على طلبكم!<br>لهيك ما تترددوا تحكوا معنا اذا في طعم معين ببالكم",
             image: "assets/productsss.png"
         }));
 
+        // P25: Locations Page
+        const locationsData = bookData.find(i => i.type === 'locations');
+        if (locationsData) contentPages.push(generateLocationsPage(locationsData));
+
+        // P26: Instagram Page
         contentPages.push(generateInstagramPage());
 
         for (let i = 0; i < contentPages.length; i += 2) {
@@ -141,9 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const sheet = createEl('div', 'page');
 
-            // Special Background for Page 3 (Intro back)
+            // P3 Background (Intro page back / page 3)
             let frontClass = "page-front";
-            if (i === 2) frontClass += " page-3-background";
+            if (i === 2) frontClass += " page-3-background no-texture";
 
             sheet.innerHTML = `
                 <div class="${frontClass}">${frontHTML}<div class="page-number">${i + 1}</div></div>
@@ -172,11 +175,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateIntro(data) {
-        return `<div class="product-full-page text-side">
-                    <h2 style="margin-top: 0; font-family: 'Amiri', serif;">${data.title}</h2>
-                    <p style="margin-top: -10px;">${data.text}</p>
-                    <div style="margin-top: auto; padding-top: 40px;">
-                        <p style="font-size: 0.8rem; color: var(--primary-color);">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
+        return `<div class="product-full-page text-side" style="padding: 40px 20px;">
+                    <h2 style="font-family: 'Amiri', serif; font-size: 2.8rem; margin-bottom: 30px;">${data.title}</h2>
+                    <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-color);">${data.text}</p>
+                    <div style="margin-top: auto; padding-top: 50px;">
+                        <p style="font-size: 1rem; color: var(--primary-color); font-weight: 700; border-top: 2px solid var(--accent-color); pt: 15px;">
+                            مناسبة للأطفال، للرياضيين، لمرضى السكري، وللجميع!
+                        </p>
                     </div>
                 </div>`;
     }
@@ -213,11 +218,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateInstagramPage() {
-        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center;">
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%;">
-                        <img src="assets/instagram_new.png" style="width: 140px; margin-bottom: 25px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));">
-                        <div class="insta-qr-bubble">
-                            <h2 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: #1a472a; font-family: 'Cairo', sans-serif !important;">Add us on Instagram!</h2>
+        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center; background-image: url('assets/photo.jpeg') !important;">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; background: rgba(255,255,255,0.15); backdrop-filter: blur(2px);">
+                        <div class="insta-qr-container">
+                            <img src="assets/instagram_new.png" class="insta-qr-img">
+                        </div>
+                        <div class="insta-text-box">
+                            <h2 style="margin: 0; font-size: 1.8rem; font-weight: 900; color: #1a472a; font-family: 'Cairo', sans-serif !important; letter-spacing: 1px;">Add us on Instagram!</h2>
+                            <p style="margin: 10px 0 0; color: #1a472a; opacity: 0.8; font-weight: 700;">@nawa.ps</p>
                         </div>
                     </div>
                 </div>`;
