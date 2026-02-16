@@ -321,6 +321,7 @@ div.product-full-page>*:last-child {
     background-repeat: no-repeat !important;
     padding: 0 !important;
     filter: none !important;
+    -webkit-filter: none !important;
 }
 
 .insta-qr-container {

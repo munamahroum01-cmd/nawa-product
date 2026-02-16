@@ -221,9 +221,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateInstagramPage() {
-        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center; background-image: none !important; background-color: var(--page-bg) !important;">
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px;">
-                        <img src="assets/instagram.jpeg" style="max-width: 90%; max-height: 80%; object-fit: contain; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center; background-image: url('assets/photo.jpeg') !important; background-size: cover !important; background-position: center !important;">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; gap: 15px;">
+                        <div class="insta-qr-container" style="background: transparent; padding: 0; margin: 0;">
+                            <img src="assets/instagram_new.png" class="insta-qr-img" style="width: 180px; height: 180px;">
+                        </div>
+                        <h2 style="margin: 0; font-size: 1.5rem; color: white !important; text-shadow: 0 2px 10px rgba(0,0,0,0.8); font-family: 'Amiri', serif;">Add us on Instagram!</h2>
                     </div>
                 </div>`;
     }
