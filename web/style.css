@@ -110,6 +110,11 @@ body {
     -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
+    /* PERFORMANCE FIX: Prevent disappearing content during flips */
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 /* Hide scrollbars but keep functionality */
@@ -318,12 +323,11 @@ div.product-full-page>*:last-child {
 }
 
 .insta-qr-container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    padding: 20px;
-    border-radius: 20px;
-    border: 2px solid rgba(26, 71, 42, 0.3);
-    margin-bottom: 25px;
+    background: transparent;
+    /* Truly transparent now */
+    padding: 10px;
+    border: none;
+    margin-bottom: 20px;
     transition: transform 0.3s;
 }
 
@@ -384,33 +388,34 @@ div.product-full-page>*:last-child {
 
     .page-front,
     .page-back {
-        padding: 55px 40px !important;
-        /* CONTAINMENT BOOTS: Absolute force */
+        padding: 65px 50px !important;
+        /* GREATER PADDING FOR CONTAINMENT */
         overflow-x: hidden !important;
         box-sizing: border-box !important;
     }
 
     /* Contain images on mobile */
     .product-image {
-        max-width: 85% !important;
-        max-height: 150px !important;
-        margin: 10px auto;
+        max-width: 80% !important;
+        max-height: 140px !important;
+        margin: 5px auto;
     }
 
     .nutrition-table {
-        max-width: 92% !important;
+        max-width: 88% !important;
+        margin: 10px auto !important;
     }
 
     .product-full-page p {
         font-size: 0.9rem !important;
-        line-height: 1.4;
+        line-height: 1.45;
         padding: 0 5px !important;
-        margin: 5px 0;
+        margin: 4px 0;
     }
 
     .product-table-view ul {
-        font-size: 0.95rem !important;
-        margin: 5px auto;
+        font-size: 0.9rem !important;
+        margin: 3px auto;
     }
 }
 
