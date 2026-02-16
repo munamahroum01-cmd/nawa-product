@@ -27,7 +27,6 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    /* Prevent body scrolling while allowing page scrolling */
 }
 
 body {
@@ -89,9 +88,7 @@ body {
     backface-visibility: hidden;
     padding: 25px;
     overflow-y: auto;
-    /* Enable vertical scrolling for content overflow */
     -webkit-overflow-scrolling: touch;
-    /* Smooth scrolling on iOS */
     display: flex;
     flex-direction: column;
 }
@@ -154,9 +151,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; -- Avoid this for scrollable flex */
     text-align: center;
+    padding: 25px;
     padding-bottom: 40px;
+}
+
+.cover-page>*:first-child {
+    margin-top: auto;
+}
+
+.cover-page>*:last-child {
+    margin-bottom: auto;
 }
 
 .cover-page h1 {
@@ -181,10 +187,19 @@ div.product-full-page {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* Removed justify-content: center to prevent clipping */
     align-items: center;
     padding: 15px;
     text-align: center;
+}
+
+/* Surgical fix for centering vs overflow */
+div.product-full-page>*:first-child {
+    margin-top: auto;
+}
+
+div.product-full-page>*:last-child {
+    margin-bottom: auto;
 }
 
 .product-table-view {
