@@ -138,9 +138,25 @@ document.addEventListener('DOMContentLoaded', () => {
         // P26: Instagram Page
         contentPages.push(generateInstagramPage());
 
+        // P27: Final Back Cover
+        contentPages.push(`<div class="cover-page" style="justify-content: center; height: 100%;">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <img src="assets/logo.jpeg" class="logo" style="width: 120px; margin-bottom: 20px;">
+                        <div class="insta-qr-container">
+                             <img src="assets/instagram_new.png" class="insta-qr-img" style="width: 120px; height: 120px;">
+                        </div>
+                        <p style="color: var(--primary-color); font-weight: 700; margin-top: 10px;">@nawa.ps</p>
+                    </div>
+                </div>`);
+
         for (let i = 0; i < contentPages.length; i += 2) {
             const frontHTML = contentPages[i];
-            const backHTML = contentPages[i + 1] || `<div class="product-full-page instagram-page"><h2>Add us on Instagram!</h2></div>`;
+            const backHTML = contentPages[i + 1] || `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center;">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <img src="assets/instagram_new.png" class="insta-qr-img" style="width: 120px; height: 120px;">
+                        <p style="color: white; margin-top: 10px;">@nawa.ps</p>
+                    </div>
+                </div>`;
 
             const sheet = createEl('div', 'page');
 
