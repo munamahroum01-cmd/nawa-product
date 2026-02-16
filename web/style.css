@@ -224,12 +224,13 @@ div.product-full-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0;
-    /* Padding handled by parent container */
-    text-align: center;
     background: transparent;
     border: none;
     box-shadow: none;
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 /* Surgical fix for centering vs overflow */
@@ -332,11 +333,11 @@ div.product-full-page>*:last-child {
 }
 
 .insta-qr-img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     object-fit: contain;
-    /* Recolor to #4a342c (Nut Packaging Brown) */
-    filter: invert(20%) sepia(20%) saturate(2200%) hue-rotate(340deg) brightness(85%) contrast(95%);
+    /* Recolor to #4a342c (PRECise match for palette) */
+    filter: invert(20%) sepia(10%) saturate(2500%) hue-rotate(345deg) brightness(85%) contrast(100%);
     mix-blend-mode: normal;
 }
 
@@ -383,8 +384,12 @@ div.product-full-page>*:last-child {
 
     .book {
         transform-style: preserve-3d !important;
+        margin-top: 25px;
+        /* SHIFT BOOK DOWN BY 20-25px */
         /* Force hardware acceleration for mobile performance */
         will-change: transform;
+        transform: rotateX(0.001deg);
+        /* Maintain compositor active */
     }
 
     .page-front,

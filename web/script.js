@@ -178,13 +178,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateIntro(data) {
-        return `<div class="product-full-page text-side" style="padding-top: 40px;">
-                    <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 1.8rem;">${data.title}</h2>
-                    <p style="margin-top: 5px; font-size: 0.9rem; line-height: 1.5; opacity: 0.9;">${data.text}</p>
+        return `<div class="intro-frame-container" style="padding: 15px; height: 100%; width: 100%; background: url('assets/Pal.jpg') center/cover; position: absolute; top:0; left:0;">
+                <div class="product-full-page text-side" style="padding-top: 40px; background-image: url('assets/photo.jpeg') !important; background-size: cover; background-position: center; height: 100%; position: relative; border: 1px solid rgba(255,255,255,0.2);">
+                    <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 1.8rem; color: white !important; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">${data.title}</h2>
+                    <p style="margin-top: 5px; font-size: 0.9rem; line-height: 1.5; color: white !important; text-shadow: 0 1px 5px rgba(0,0,0,0.8);">${data.text}</p>
                     <div style="margin-top: auto; padding-bottom: 25px;">
-                        <p style="font-size: 0.75rem; font-weight: 400; color: var(--primary-color);">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
+                        <p style="font-size: 0.75rem; font-weight: 400; color: white !important; text-shadow: 0 1px 5px rgba(0,0,0,0.8); border-top: 1px solid rgba(255,255,255,0.3); padding-top: 10px;">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
                     </div>
-                </div>`;
+                </div>
+            </div>`;
     }
 
     function generatePhotoPage(data) {
@@ -209,11 +211,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateMessagePage(data) {
-        return `<div class="product-full-page text-side">
+        return `<div class="product-full-page text-side" style="justify-content: center;">
         <h2 style="font-family: 'Amiri', serif;">${data.title}</h2>
         <p style="padding: 0 15px; font-size: 0.95rem;">${data.text}</p>
-        <div style="padding: 25px; display: flex; justify-content: center; width: 100%;">
-            <img src="${data.image}" style="max-width: 65%; max-height: 220px; object-fit: contain; border-radius: 12px; box-shadow: none;">
+        <div style="padding: 15px; display: flex; justify-content: center; width: 100%;">
+            <img src="${data.image}" style="max-width: 85%; max-height: 280px; object-fit: contain; border-radius: 12px; box-shadow: none;">
         </div>
         </div>`;
     }
@@ -221,23 +223,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateInstagramPage() {
         return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center;">
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%;">
-                        <div class="insta-qr-container">
-                            <img src="assets/instagram_new.png" class="insta-qr-img">
+                        <div class="insta-qr-container" style="margin-bottom: 10px;">
+                            <img src="assets/instagram_new.png" class="insta-qr-img" style="width: 150px; height: 150px;">
                         </div>
                         <div class="insta-text-box" style="margin-top: 5px; background: rgba(255,255,255,0.7); padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(74, 52, 44, 0.2);">
-                            <h2 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: #4a342c; font-family: 'Cairo', sans-serif !important;">Follow us on Instagram</h2>
-                            <p style="margin: 3px 0 0; color: #4a342c; opacity: 0.9; font-weight: 600; font-size: 0.85rem;">@nawa.ps</p>
+                            <h2 style="margin: 0; font-size: 1rem; font-weight: 700; color: #4a342c; font-family: 'Cairo', sans-serif !important;">Follow us on Instagram</h2>
+                            <p style="margin: 3px 0 0; color: #4a342c; opacity: 0.9; font-weight: 600; font-size: 0.8rem;">@nawa.ps</p>
                         </div>
                     </div>
                 </div>`;
     }
 
     function generateLocationsPage(data) {
-        return `<div class="product-full-page text-side" style="padding-top: 10px; padding-bottom: 20px;">
-                    <img src="${data.image}" style="max-width: 80%; max-height: 180px; object-fit: contain; border-radius: 8px;">
-                    <h2 style="font-family: 'Amiri', serif; font-size: 2rem; margin-top: 5px;">${data.title}</h2>
-                    <ul style="list-style: disc; padding-inline-start: 25px; margin: 5px auto; width: fit-content; text-align: start; font-size: 0.95rem; line-height: 1.45;">
-                        ${data.points.map(p => `<li style="margin-bottom: 2px;">${p}</li>`).join('')}
+        return `<div class="product-full-page text-side" style="padding-top: 10px; padding-bottom: 20px; justify-content: flex-start;">
+                    <img src="${data.image}" style="max-width: 80%; max-height: 180px; object-fit: contain; border-radius: 8px; margin-top: 10px;">
+                    <h2 style="font-family: 'Amiri', serif; font-size: 2rem; margin-top: 15px;">${data.title}</h2>
+                    <ul style="list-style: disc; padding-inline-start: 25px; margin: 10px auto; width: fit-content; text-align: start; font-size: 0.95rem; line-height: 1.5;">
+                        ${data.points.map(p => `<li style="margin-bottom: 3px;">${p}</li>`).join('')}
                     </ul>
                 </div>`;
     }
