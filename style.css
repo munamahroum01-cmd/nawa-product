@@ -86,7 +86,7 @@ body {
     right: 0;
     transform-origin: left center;
     transform-style: preserve-3d;
-    transition: transform var(--transition-speed) cubic-bezier(0.2, 0, 0.2, 1);
+    transition: transform var(--transition-speed) ease-in-out;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     border-radius: 5px 15px 15px 5px;
     will-change: transform;
@@ -333,8 +333,8 @@ div.product-full-page>*:last-child {
     width: 200px;
     height: 200px;
     object-fit: contain;
-    /* Recolor to #1a472a */
-    filter: invert(21%) sepia(19%) saturate(1455%) hue-rotate(90deg) brightness(85%) contrast(100%);
+    /* Recolor to #4a342c (Nut Packaging Brown) */
+    filter: invert(20%) sepia(20%) saturate(2200%) hue-rotate(340deg) brightness(85%) contrast(95%);
     mix-blend-mode: normal;
 }
 

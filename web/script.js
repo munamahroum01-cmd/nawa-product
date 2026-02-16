@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateIntro(data) {
-        return `<div class="product-full-page text-side" style="padding-top: 50px;">
+        return `<div class="product-full-page text-side" style="padding-top: 40px;">
                     <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 1.8rem;">${data.title}</h2>
                     <p style="margin-top: 5px; font-size: 0.9rem; line-height: 1.5; opacity: 0.9;">${data.text}</p>
                     <div style="margin-top: auto; padding-bottom: 25px;">
@@ -224,20 +224,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="insta-qr-container">
                             <img src="assets/instagram_new.png" class="insta-qr-img">
                         </div>
-                        <div class="insta-text-box" style="margin-top: 5px; background: rgba(255,255,255,0.7); padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(26, 71, 42, 0.1);">
-                            <h2 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: #1a472a; font-family: 'Cairo', sans-serif !important;">Follow us on Instagram</h2>
-                            <p style="margin: 3px 0 0; color: #1a472a; opacity: 0.9; font-weight: 600; font-size: 0.85rem;">@nawa.ps</p>
+                        <div class="insta-text-box" style="margin-top: 5px; background: rgba(255,255,255,0.7); padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(74, 52, 44, 0.2);">
+                            <h2 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: #4a342c; font-family: 'Cairo', sans-serif !important;">Follow us on Instagram</h2>
+                            <p style="margin: 3px 0 0; color: #4a342c; opacity: 0.9; font-weight: 600; font-size: 0.85rem;">@nawa.ps</p>
                         </div>
                     </div>
                 </div>`;
     }
 
     function generateLocationsPage(data) {
-        return `<div class="product-full-page text-side" style="padding-top: 20px; padding-bottom: 20px;">
-                    <img src="${data.image}" style="max-width: 75%; max-height: 150px; object-fit: contain; border-radius: 8px;">
-                    <h2 style="font-family: 'Amiri', serif; font-size: 1.8rem; margin-top: 10px;">${data.title}</h2>
-                    <ul style="list-style: disc; padding-inline-start: 25px; margin: 5px auto; width: fit-content; text-align: start; font-size: 0.85rem; line-height: 1.4;">
-                        ${data.points.map(p => `<li style="margin-bottom: 1px;">${p}</li>`).join('')}
+        return `<div class="product-full-page text-side" style="padding-top: 10px; padding-bottom: 20px;">
+                    <img src="${data.image}" style="max-width: 80%; max-height: 180px; object-fit: contain; border-radius: 8px;">
+                    <h2 style="font-family: 'Amiri', serif; font-size: 2rem; margin-top: 5px;">${data.title}</h2>
+                    <ul style="list-style: disc; padding-inline-start: 25px; margin: 5px auto; width: fit-content; text-align: start; font-size: 0.95rem; line-height: 1.45;">
+                        ${data.points.map(p => `<li style="margin-bottom: 2px;">${p}</li>`).join('')}
                     </ul>
                 </div>`;
     }
