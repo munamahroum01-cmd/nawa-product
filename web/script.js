@@ -178,15 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateIntro(data) {
-        return `<div class="intro-frame-container" style="padding: 15px; height: 100%; width: 100%; background: url('assets/Pal.jpg') center/cover; position: absolute; top:0; left:0;">
-                <div class="product-full-page text-side" style="padding-top: 40px; background-image: url('assets/photo.jpeg') !important; background-size: cover; background-position: center; height: 100%; position: relative; border: 1px solid rgba(255,255,255,0.2);">
-                    <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 1.8rem; color: white !important; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">${data.title}</h2>
-                    <p style="margin-top: 5px; font-size: 0.9rem; line-height: 1.5; color: white !important; text-shadow: 0 1px 5px rgba(0,0,0,0.8);">${data.text}</p>
-                    <div style="margin-top: auto; padding-bottom: 25px;">
-                        <p style="font-size: 0.75rem; font-weight: 400; color: white !important; text-shadow: 0 1px 5px rgba(0,0,0,0.8); border-top: 1px solid rgba(255,255,255,0.3); padding-top: 10px;">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
+        return `<div class="product-full-page text-side page-2-background no-texture" style="padding-top: 50px;">
+                    <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 2.22rem;">${data.title}</h2>
+                    <p style="margin-top: 5px; font-size: 0.98rem; line-height: 1.6; opacity: 0.9;">${data.text}</p>
+                    <div style="margin-top: auto; padding-bottom: 30px;">
+                        <p style="font-size: 0.78rem; font-weight: 500; color: white;">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
                     </div>
-                </div>
-            </div>`;
+                </div>`;
     }
 
     function generatePhotoPage(data) {
@@ -201,11 +199,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generateDescPage(data) {
         return `<div class="product-full-page text-side">
-                    <div class="product-table-view">
+                    <div class="product-table-view" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
                         <ul style="list-style: none; padding: 0; margin: 0 auto 15px; text-align: center; font-size: 1.2rem; font-weight: bold; line-height: 1.8;">
                             ${data.features.map(f => `<li>${f}</li>`).join('')}
                         </ul>
-                        ${data.tableImage ? `<img src="${data.tableImage}" class="nutrition-table" style="margin-top: 10px;">` : ''}
+                        ${data.tableImage ? `<div style="width: 100%; display: flex; justify-content: center;"><img src="${data.tableImage}" class="nutrition-table" style="margin: 0 auto;"></div>` : ''}
                     </div>
                 </div>`;
     }

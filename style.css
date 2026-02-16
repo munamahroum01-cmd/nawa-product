@@ -270,13 +270,13 @@ div.product-full-page>*:last-child {
 }
 
 .nutrition-table {
+    display: block;
     width: 100%;
     max-width: 280px;
-    /* Enlarged but contained */
-    margin: 15px auto;
+    margin: 15px auto !important;
+    /* Force center */
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    /* Premium shadow */
     background: white;
 }
 
@@ -336,7 +336,7 @@ div.product-full-page>*:last-child {
     height: 150px;
     object-fit: contain;
     /* Recolor to #4a342c (PRECise match for palette) */
-    filter: invert(20%) sepia(10%) saturate(2500%) hue-rotate(345deg) brightness(85%) contrast(100%);
+    filter: invert(21%) sepia(21%) saturate(1450%) hue-rotate(345deg) brightness(85%) contrast(100%);
     mix-blend-mode: normal;
 }
 
