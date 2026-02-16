@@ -100,15 +100,14 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
-    /* Harmonized padding to match Pal.jpg border thickness */
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    /* CRITICAL FOR SAFARI */
     padding: 65px 55px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
-    font-family: 'Cairo', sans-serif;
-    /* Unified font for all content */
 }
 
 /* Hide scrollbars but keep functionality */
@@ -290,12 +289,19 @@ div.product-full-page>*:last-child {
 .instagram-page {
     background-image: url('assets/photo.jpeg') !important;
     background-size: 100% 100% !important;
-    /* Force full size fitting the container exactly */
     background-position: center !important;
     background-repeat: no-repeat !important;
     filter: none !important;
-    /* Ensure no blur */
-    color: white;
+    color: var(--primary-color);
+    padding: 0 !important;
+}
+
+.insta-qr-bubble {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(26, 71, 42, 0.2);
 }
 
 .insta-code {
@@ -315,17 +321,37 @@ div.product-full-page>*:last-child {
 
 @media (max-width: 768px) {
     :root {
-        --book-width: 350px;
-        --book-height: 550px;
+        --book-width: 300px;
+        --book-height: 480px;
     }
 
     .book-container {
-        perspective: none !important;
-        /* Remove 3D perspective on mobile to prevent Safari crashes */
+        perspective: 2000px;
+        height: 100svh;
+        overflow: visible;
+    }
+
+    .book {
+        transform-style: preserve-3d !important;
+    }
+
+    .page {
+        transform-style: preserve-3d !important;
+    }
+
+    .page-front,
+    .page-back {
+        padding: 55px 40px !important;
+        /* Reduced padding for mobile screen fit */
+    }
+
+    .product-full-page p {
+        font-size: 0.9rem !important;
+        /* Smaller text for mobile fit */
     }
 
     .product-image {
-        max-height: 200px;
+        max-height: 180px;
     }
 }
 

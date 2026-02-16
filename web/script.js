@@ -33,12 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const bookHeight = parseInt(style.getPropertyValue('--book-height'));
 
             if (isMobile) {
-                // More stable scaling to prevent crashes
-                const totalWidthRequired = bookHeight * 1.05;
-                const availableWidthForScaledHeight = window.innerWidth * 0.98;
-                const scale = Math.min(availableWidthForScaledHeight / totalWidthRequired, 1.3);
+                // FIT TO PHONE WIDTH (Constraint is width because book is rotated)
+                const scale = (window.innerWidth * 0.94) / bookHeight;
 
-                container.style.transform = `rotate(90deg) scale(${scale})`;
+                // Ensure perfect centering with the fixed container
+                container.style.transform = `translate(-50%, -50%) rotate(90deg) scale(${scale})`;
             } else {
                 // Desktop Regular
                 const totalWidthRequired = bookWidth * 2.1;
@@ -113,8 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const contentPages = [];
 
         contentPages.push(generateCover(bookData[0]));
+        // PAGE 2: Our Collection Header
+        contentPages.push(`<div class="product-full-page" style="justify-content: center; height: 100%;">
+            <h1 style="font-family: 'Amiri', serif; font-size: 2.8rem;">مجموعتنا</h1>
+            <p style="font-size: 1.1rem; color: var(--primary-color);">طبيعي وعضوي 100%</p>
+        </div>`);
+        // PAGE 3: Intro
         contentPages.push(generateIntro(bookData[1]));
-        contentPages.push(`<div class="product-full-page"><h1>Our Collection</h1><p>Natural & Organic</p></div>`);
 
         const products = bookData.filter(i => i.type === 'product');
         products.forEach(p => {
@@ -122,20 +126,19 @@ document.addEventListener('DOMContentLoaded', () => {
             contentPages.push(generateDescPage(p));
         });
 
-        // Optimization: Pre-generate these to ensure they are ready
-        const messagePage = generateMessagePage({
-            title: "طلب خاص؟",
-            text: "منتجاتنا كتيرة, بس مع هيك ما عنا مشكلة نعملكم منتج معين بناءا على طلبكم!<br>لهيك ما تترددوا تحكوا معنا اذا في طعم معين ببالكم",
-            image: "assets/productsss.png"
-        });
-        contentPages.push(messagePage);
-
+        // Add specialized pages
         const locationsData = bookData.find(i => i.type === 'locations') || {
             image: "assets/Map.jpg",
             title: "نقاط بيعنا في:",
             points: ["جنين", "رام الله", "نابلس", "الخليل"]
         };
         contentPages.push(generateLocationsPage(locationsData));
+
+        contentPages.push(generateMessagePage({
+            title: "طلب خاص؟",
+            text: "منتجاتنا كتيرة, بس مع هيك ما عنا مشكلة نعملكم منتج معين بناءا على طلبكم!<br>لهيك ما تترددوا تحكوا معنا اذا في طعم معين ببالكم",
+            image: "assets/productsss.png"
+        }));
 
         contentPages.push(generateInstagramPage());
 
@@ -220,10 +223,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateInstagramPage() {
-        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center; padding: 0 !important; background-image: url('assets/photo.jpeg') !important; background-size: cover !important;">
-                    <div style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: center;">
-                        <img src="assets/instagram_new.png" style="width: 220px; border-radius: 15px; background: transparent; opacity: 0.82; transition: transform 0.3s; filter: drop-shadow(0 0 15px rgba(0,0,0,0.4));">
-                        <h2 style="margin-top: 20px; font-size: 1.8rem; font-weight: 800; background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 10px rgba(0,0,0,0.3);">Add us on Instagram!</h2>
+        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center;">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%;">
+                        <img src="assets/instagram_new.png" style="width: 140px; margin-bottom: 25px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));">
+                        <div class="insta-qr-bubble">
+                            <h2 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: #1a472a; font-family: 'Cairo', sans-serif !important;">Add us on Instagram!</h2>
+                        </div>
                     </div>
                 </div>`;
     }
