@@ -315,9 +315,13 @@ div.product-full-page>*:last-child {
         --book-height: 550px;
     }
 
+    .book-container {
+        perspective: none !important;
+        /* Remove 3D perspective on mobile to prevent Safari crashes */
+    }
+
     .product-image {
         max-height: 200px;
-        /* Smaller image on mobile to prevent text clipping */
     }
 }
 

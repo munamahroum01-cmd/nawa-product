@@ -156,11 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
             contentPages.push(generateDescPage(p));
         });
 
-        contentPages.push(generateMessagePage({
+        // Optimization: Pre-generate these to ensure they are ready
+        const messagePage = generateMessagePage({
             title: "طلب خاص؟",
             text: "منتجاتنا كتيرة, بس مع هيك ما عنا مشكلة نعملكم منتج معين بناءا على طلبكم!<br>لهيك ما تترددوا تحكوا معنا اذا في طعم معين ببالكم",
             image: "assets/productsss.png"
-        }));
+        });
+        contentPages.push(messagePage);
 
         const locationsData = bookData.find(i => i.type === 'locations') || {
             image: "assets/Map.jpg",
@@ -244,18 +246,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateMessagePage(data) {
         return `<div class="product-full-page text-side">
         <h2>${data.title}</h2>
-        <p style="padding: 0 15px;">${data.text}</p>
-        <div style="padding: 25px; display: flex; justify-content: center; width: 100%;">
-            <img src="${data.image}" style="max-width: 80%; max-height: 250px; object-fit: contain; border-radius: 12px; box-shadow: none;">
+        <p style="padding: 0 15px; font-size: 0.95rem;">${data.text}</p>
+        <div style="padding: 35px; display: flex; justify-content: center; width: 100%;">
+            <img src="${data.image}" style="max-width: 65%; max-height: 220px; object-fit: contain; border-radius: 12px; box-shadow: none;">
         </div>
         </div>`;
     }
 
     function generateInstagramPage() {
-        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center; padding: 0 !important;">
+        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center; padding: 0 !important; background-image: url('assets/photo.jpeg') !important; background-size: cover !important;">
                     <div style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: center;">
-                        <img src="assets/instagram_new.png" style="width: 220px; border-radius: 15px; background: transparent; transition: transform 0.3s;">
-                        <h2 style="color: white; margin-top: 20px; text-shadow: 0 2px 10px rgba(0,0,0,1); font-size: 1.6rem; font-weight: bold;">Add us on Instagram!</h2>
+                        <img src="assets/instagram_new.png" style="width: 220px; border-radius: 15px; background: transparent; opacity: 0.7; transition: transform 0.3s; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));">
+                        <h2 style="color: white; margin-top: 15px; text-shadow: 0 2px 10px rgba(0,0,0,1); font-size: 1.6rem; font-weight: bold;">Add us on Instagram!</h2>
                     </div>
                 </div>`;
     }
@@ -301,5 +303,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     preloadAssets();
     renderBook();
-    addBackgroundDecorations();
 });
