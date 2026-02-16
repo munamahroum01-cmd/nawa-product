@@ -192,7 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             sheet.addEventListener('click', (e) => {
+<<<<<<< HEAD
                 // Only trigger if it wasn't a swipe or accidental touch move
+=======
+                const rect = sheet.getBoundingClientRect();
+>>>>>>> 9883875745dd5253faaacb71967212e367c34ce1
                 const allSheets = Array.from(document.querySelectorAll('.page'));
                 const myIndex = allSheets.indexOf(sheet);
 
@@ -209,11 +213,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateCover(data) {
-        return `<div class="cover-page"><img src="${data.image}" class="logo"><h1>${data.title}</h1><p>${data.subtitle}</p></div>`;
+        return `<div class="cover-page">
+                    <img src="${data.image}" class="logo">
+                    <h1>${data.title}</h1>
+                    <p>${data.subtitle}</p>
+                    <p>${data.footer}</p>
+                </div>`;
     }
 
     function generateIntro(data) {
-        return `<div class="product-full-page text-side"><h2>${data.title}</h2><p>${data.text}</p></div>`;
+        return `<div class="product-full-page text-side">
+        <h2>${data.title}</h2>
+        <p>${data.text}</p>
+        <p>${data.footer}</p>
+        </div>`;
     }
 
     function generatePhotoPage(data) {
@@ -225,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateMessagePage(data) {
-        return `<div class="product-full-page text-side"><h2>${data.title}</h2><p>${data.text}</p><img src="${data.image}" style="max-width:90%; border-radius:10px;"></div>`;
+        return `<div class="product-full-page text-side"><h2>${data.title}</h2><p>${data.text}</p><img src="${data.image}" style="max-width:60%; border-radius:10px;"></div>`;
     }
 
     function generateInstagramPage() {
@@ -233,7 +246,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateLocationsPage(data) {
-        return `<div class="product-full-page text-side"><h2>${data.title}</h2><ul style="list-style:none; padding:0;">${data.points.map(p => `<li>${p}</li>`).join('')}</ul></div>`;
+        return `<div class="product-full-page text-side">
+        <h2>${data.title}</h2>
+        <ul style="list-style:none; padding:0;">${data.points.map(p => `<li>${p}</li>`).join('')}</ul>
+        <p>${data.footer}</p>
+        </div>`;
     }
 
     function updateZIndexes() {
