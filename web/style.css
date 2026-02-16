@@ -7,10 +7,26 @@
     --bg-color: #D4B996;
     --page-bg: #fffbf0;
 
-    /* Base Book Dimensions - FIXED (Scaled by JS on small screens) */
-    --book-width: 450px;
-    --book-height: 700px;
+    /* Base Book Dimensions - MOBILE FIRST DEFAULT (< 768px) */
+    --book-width: 350px;
+    --book-height: 550px;
     --transition-speed: 1.2s;
+}
+
+/* Tablet Override (> 768px) */
+@media (min-width: 769px) {
+    :root {
+        --book-width: 400px;
+        --book-height: 650px;
+    }
+}
+
+/* Desktop Override (> 1024px) */
+@media (min-width: 1025px) {
+    :root {
+        --book-width: 450px;
+        --book-height: 700px;
+    }
 }
 
 /* Global Box Sizing */
@@ -52,6 +68,32 @@ body {
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
     height: 100%;
+    /* Ensure no residual transforms interfere with JS */
+    transform-style: preserve-3d;
+}
+
+/* Orientation Support */
+@media (orientation: landscape) and (max-width: 1024px) {
+
+    /* Mobile Landscape: Height is the constraint */
+    :root {
+        --book-height: 85vh;
+        --book-width: 55vh;
+        /* Maintain approx ratio */
+    }
+}
+
+@media (orientation: portrait) and (max-width: 768px) {
+
+    /* Mobile Portrait: Width is the constraint */
+    :root {
+        --book-width: 85vw;
+        /* Use Viewport units for better fit */
+        --book-height: 130vw;
+        /* Maintain approx ratio */
+        /* Max constraints to prevent too tall */
+        max-height: 80vh;
+    }
 }
 
 .book {
@@ -154,9 +196,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Safety for mobile */
     text-align: center;
     padding-bottom: 40px;
+    padding-top: 40px;
+    /* Add top padding */
+}
+
+@media (min-height: 600px) {
+    .cover-page {
+        justify-content: center;
+        padding-top: 0;
+    }
 }
 
 .cover-page h1 {
@@ -181,10 +233,19 @@ div.product-full-page {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Default: Start from top to prevent clipping */
     align-items: center;
-    padding: 15px;
+    padding: 20px 15px;
+    /* Add padding for spacing */
     text-align: center;
+}
+
+/* Re-center on larger screens if height allows */
+@media (min-height: 700px) and (min-width: 769px) {
+    div.product-full-page {
+        justify-content: center;
+    }
 }
 
 .product-table-view {
@@ -230,19 +291,7 @@ div.product-full-page {
 }
 
 /* Tablet & Mobile Responsiveness */
-@media (max-width: 1024px) {
-    :root {
-        --book-width: 400px;
-        --book-height: 650px;
-    }
-}
-
-@media (max-width: 768px) {
-    :root {
-        --book-width: 350px;
-        --book-height: 550px;
-    }
-}
+/* Legacy max-width breakpoints removed in favor of Mobile-First min-width above */
 
 /* Hide navigation buttons */
 .controls,
