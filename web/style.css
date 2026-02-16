@@ -338,7 +338,7 @@ div.product-full-page>*:last-child {
     width: 150px;
     height: 150px;
     object-fit: contain;
-    /* REMOVED FILTER - Preserving original image details */
+    /* ENSURING ORIGINAL VISIBILITY */
     filter: none !important;
     mix-blend-mode: normal;
 }
