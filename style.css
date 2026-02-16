@@ -336,8 +336,8 @@ div.product-full-page>*:last-child {
     width: 150px;
     height: 150px;
     object-fit: contain;
-    /* EXACT RECOLOR to #4a342c (Matched brown palette) */
-    filter: invert(19%) sepia(18%) saturate(1200%) hue-rotate(345deg) brightness(95%) contrast(90%);
+    /* PURE WHITE RECOLOR */
+    filter: brightness(0) invert(1);
     mix-blend-mode: normal;
 }
 
