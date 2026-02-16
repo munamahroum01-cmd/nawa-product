@@ -134,12 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
             image: "assets/productsss.png"
         }));
 
-        contentPages.push(generateLocationsPage({
+        const locationsData = bookData.find(i => i.type === 'locations') || {
             image: "assets/Map.jpg",
             title: "نقاط بيعنا في:",
-            points: ["جنين", "رام الله", "نابلس", "الخليل"],
-            footer: "وبنرحب بنقاط بيع جديدة!"
-        }));
+            points: ["جنين", "رام الله", "نابلس", "الخليل"]
+        };
+        contentPages.push(generateLocationsPage(locationsData));
 
         contentPages.push(generateInstagramPage());
 
@@ -179,27 +179,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateIntro(data) {
-        return `<div class="product-full-page text-side"><h2>${data.title}</h2><p>${data.text}</p></div>`;
+        return `<div class="product-full-page text-side">
+                    <h2 style="margin-top: 0;">${data.title}</h2>
+                    <p style="margin-top: -10px;">${data.text}</p>
+                    <p style="margin-top: 30px; font-weight: bold; color: var(--primary-color); font-size: 1.1rem;">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
+                </div>`;
     }
 
     function generatePhotoPage(data) {
-        return `<div class="product-full-page image-side"><div class="product-image-container">${data.image ? `<img src="${data.image}" class="product-image">` : ""}</div></div>`;
+        return `<div class="product-full-page image-side">
+                    <h2>${data.product}</h2>
+                    <div class="product-image-container">
+                        ${data.image ? `<img src="${data.image}" class="product-image">` : ""}
+                    </div>
+                    <p style="margin-top: 15px; font-size: 0.95rem; line-height: 1.6;">${data.description}</p>
+                </div>`;
     }
 
     function generateDescPage(data) {
-        return `<div class="product-full-page text-side"><div class="product-table-view"><h2>${data.product}</h2><p>${data.description}</p><ul>${data.features.map(f => `<li>${f}</li>`).join('')}</ul>${data.tableImage ? `<img src="${data.tableImage}" class="nutrition-table">` : ''}</div></div>`;
+        return `<div class="product-full-page text-side">
+                    <div class="product-table-view">
+                        <ul style="list-style: none; padding: 0; margin: 0 auto 15px; text-align: center; font-size: 1.3rem; font-weight: 600; line-height: 1.8;">
+                            ${data.features.map(f => `<li>${f}</li>`).join('')}
+                        </ul>
+                        ${data.tableImage ? `<img src="${data.tableImage}" class="nutrition-table" style="margin-top: 10px;">` : ''}
+                    </div>
+                </div>`;
     }
 
     function generateMessagePage(data) {
-        return `<div class="product-full-page text-side"><h2>${data.title}</h2><p>${data.text}</p><img src="${data.image}" style="max-width:90%; border-radius:10px;"></div>`;
+        return `<div class="product-full-page text-side">
+        <h2>${data.title}</h2>
+        <p>${data.text}</p>
+        <img src="${data.image}" style="max-width:70%; border-radius:10px;">
+        </div>`;
     }
 
     function generateInstagramPage() {
-        return `<div class="product-full-page instagram-page"><h2>Add us on Instagram!</h2></div>`;
+        return `<div class="product-full-page instagram-page" style="justify-content: center;">
+                    <div style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; backdrop-filter: blur(2px);">
+                        <h2 style="color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.8); margin-bottom: 20px;">Add us on Instagram!</h2>
+                        <img src="assets/instagram_new.png" style="width: 250px; margin: 0 auto; display: block; border-radius: 12px;">
+                    </div>
+                </div>`;
     }
 
     function generateLocationsPage(data) {
-        return `<div class="product-full-page text-side"><h2>${data.title}</h2><ul style="list-style:none; padding:0;">${data.points.map(p => `<li>${p}</li>`).join('')}</ul></div>`;
+        return `<div class="product-full-page text-side">
+                    <img src="${data.image}" style="max-width: 95%;">
+                    <h2>${data.title}</h2>
+                    <ul style="list-style: disc; padding-inline-start: 25px; margin: 15px auto; width: fit-content; text-align: start; font-size: 1.2rem; line-height: 1.8;">
+                        ${data.points.map(p => `<li>${p}</li>`).join('')}
+                    </ul>
+                </div>`;
     }
 
     function updateZIndexes() {

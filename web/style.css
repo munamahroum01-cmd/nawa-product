@@ -86,7 +86,8 @@ body {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    padding: 25px;
+    /* Harmonized padding to match Pal.jpg border thickness */
+    padding: 65px 55px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: flex;
@@ -153,8 +154,8 @@ body {
     align-items: center;
     /* justify-content: center; -- Avoid this for scrollable flex */
     text-align: center;
-    padding: 25px;
-    padding-bottom: 40px;
+    padding: 0;
+    /* Padding handled by parent container */
 }
 
 .cover-page>*:first-child {
@@ -181,16 +182,21 @@ h2,
 h3 {
     font-family: 'Amiri', serif;
     color: var(--primary-color);
+    margin: 0 0 10px 0;
 }
 
 div.product-full-page {
     min-height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    /* Removed justify-content: center to prevent clipping */
     align-items: center;
-    padding: 15px;
+    padding: 0;
+    /* Padding handled by parent container */
     text-align: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
 }
 
 /* Surgical fix for centering vs overflow */
@@ -203,19 +209,21 @@ div.product-full-page>*:last-child {
 }
 
 .product-table-view {
-    background: #fff;
-    padding: 15px;
-    border-radius: 12px;
-    border: 1px solid var(--accent-color);
+    background: transparent;
+    /* Changed from white to transparent */
+    padding: 0;
+    /* Removed padding since there's no background box anymore */
+    border: none;
     width: 100%;
-    margin-top: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin: 15px 0;
+    box-shadow: none;
 }
 
 .nutrition-table {
     width: 100%;
     max-width: 250px;
-    margin: 10px auto 0;
+    margin: 10px auto;
+    /* Ensure margin top and bottom for spacing */
     border-radius: 8px;
 }
 
@@ -227,12 +235,23 @@ div.product-full-page>*:last-child {
 
 .product-image {
     max-width: 100%;
+    max-height: 280px;
+    /* Reduced to leave room for title and description */
+    object-fit: contain;
     height: auto;
     border-radius: 12px;
+    /* Removed box-shadow */
+}
+
+.product-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
 }
 
 .instagram-page {
-    background-image: url('assets/background_page3.jpeg') !important;
+    background-image: url('assets/photo.jpeg') !important;
     background-size: cover;
     color: white;
 }

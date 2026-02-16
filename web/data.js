@@ -96,5 +96,11 @@ const bookData = [
         features: ["فيتامين E", "صحة العظام", "قليل الكربوهيدرات"],
         image: null, /* Photo removed by request */
         tableImage: "assets/coconut_table.png"
+    },
+    {
+        type: "locations",
+        title: "نقاط بيعنا في:",
+        points: ["جنين", "رام الله", "نابلس", "الخليل"],
+        image: "assets/Map.jpg"
     }
 ];
