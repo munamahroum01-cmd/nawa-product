@@ -107,40 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const flipSound = new Audio('assets/page-flip.mp3');
     flipSound.volume = 0.5;
 
-    function createEl(tag, classNames, content = '') {
-        const el = document.createElement(tag);
-        if (classNames) el.className = classNames;
-        el.innerHTML = content;
-        return el;
-    }
-
-    function addBackgroundDecorations() {
-        const nutImages = [
-            'assets/almond_ingredients.png',
-            'assets/cashew_table.png',
-            'assets/macadamia_ingredients.png',
-            'assets/peanut_ingredients.jpeg'
-        ];
-
-        for (let i = 0; i < 12; i++) {
-            const nut = document.createElement('img');
-            nut.className = 'nut-decoration';
-            nut.src = nutImages[Math.floor(Math.random() * nutImages.length)];
-
-            // Random position
-            nut.style.left = Math.random() * 100 + 'vw';
-            nut.style.top = Math.random() * 100 + 'vh';
-
-            // Random size
-            const size = Math.random() * 40 + 30;
-            nut.style.width = size + 'px';
-
-            // Random rotation
-            nut.style.transform = `rotate(${Math.random() * 360}deg)`;
-
-            document.body.appendChild(nut);
-        }
-    }
 
     function renderBook() {
         book.innerHTML = '';
@@ -256,8 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateInstagramPage() {
         return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center; padding: 0 !important; background-image: url('assets/photo.jpeg') !important; background-size: cover !important;">
                     <div style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: center;">
-                        <img src="assets/instagram_new.png" style="width: 220px; border-radius: 15px; background: transparent; opacity: 0.7; transition: transform 0.3s; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));">
-                        <h2 style="color: white; margin-top: 15px; text-shadow: 0 2px 10px rgba(0,0,0,1); font-size: 1.6rem; font-weight: bold;">Add us on Instagram!</h2>
+                        <img src="assets/instagram_new.png" style="width: 220px; border-radius: 15px; background: transparent; opacity: 0.82; transition: transform 0.3s; filter: drop-shadow(0 0 15px rgba(0,0,0,0.4));">
+                        <h2 style="margin-top: 20px; font-size: 1.8rem; font-weight: 800; background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 10px rgba(0,0,0,0.3);">Add us on Instagram!</h2>
                     </div>
                 </div>`;
     }
