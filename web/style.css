@@ -53,15 +53,17 @@ body {
 }
 
 .book-container {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    perspective: 1500px;
+    perspective: 2000px;
+    background: radial-gradient(circle at center, #f5ecd8 0%, #D4B996 50%, #8C7355 100%);
     overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     z-index: 100;
 }
 
@@ -102,7 +104,8 @@ body {
     backface-visibility: hidden !important;
     -webkit-backface-visibility: hidden !important;
     /* CRITICAL FOR SAFARI */
-    padding: 65px 55px;
+    padding: 60px 45px;
+    /* Slightly tighter for better text room */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: flex;
@@ -340,17 +343,18 @@ div.product-full-page>*:last-child {
 
     .page-front,
     .page-back {
-        padding: 55px 40px !important;
-        /* Reduced padding for mobile screen fit */
+        padding: 50px 35px !important;
+        /* Safe mobile padding to prevent overflow */
     }
 
     .product-full-page p {
-        font-size: 0.9rem !important;
-        /* Smaller text for mobile fit */
+        font-size: 0.88rem !important;
+        /* Slightly smaller for mobile fit */
+        line-height: 1.4;
     }
 
     .product-image {
-        max-height: 180px;
+        max-height: 170px;
     }
 }
 
