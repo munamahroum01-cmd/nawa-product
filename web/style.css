@@ -149,24 +149,24 @@ body {
     position: absolute;
     bottom: 25px;
     font-size: 14px;
-    font-weight: 500;
-    /* Clean and neat */
-    color: var(--primary-color);
-    background: rgba(255, 255, 240, 0.4);
-    padding: 3px 10px;
+    font-weight: 700;
+    color: white;
+    /* Red and white theme */
+    background: #c02626;
+    /* Palestinian Red */
+    padding: 4px 12px;
     border-radius: 5px;
     z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Internal Numbering (near spine) */
 .page-front .page-number {
     right: 20px;
-    /* Inside edge (near spine) */
 }
 
 .page-back .page-number {
     left: 20px;
-    /* Inside edge (near spine) */
 }
 
 /* Content Styling */
@@ -265,17 +265,17 @@ div.product-full-page>*:last-child {
     border-radius: 8px;
 }
 
-.page-2-background {
-    background-image: url('photo.jpeg') !important;
+.page-3-background {
+    background-image: url('assets/photo.jpeg') !important;
     background-size: cover;
     background-position: center;
     color: white !important;
 }
 
-.page-2-background h2,
-.page-2-background p {
+.page-3-background h1,
+.page-3-background p {
     color: white !important;
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
 }
 
 .product-image {
@@ -351,39 +351,52 @@ div.product-full-page>*:last-child {
 
 @media (max-width: 768px) {
     :root {
-        --book-width: 300px;
-        --book-height: 500px;
+        --book-width: 320px;
+        --book-height: 520px;
     }
 
     .book-container {
-        perspective: 2500px;
+        perspective: 3000px;
         height: 100vh;
         width: 100vw;
-        overflow: visible;
+        overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
+        touch-action: none;
     }
 
     .book {
         transform-style: preserve-3d !important;
-        /* Adjusted centering for open book */
-        margin-left: 0;
+        /* Force hardware acceleration for mobile performance */
+        will-change: transform;
     }
 
     .page-front,
     .page-back {
-        padding: 55px 45px !important;
-        /* Extra padding for mobile edges */
+        padding: 50px 30px !important;
+        /* CONTAINMENT: Ensure no overflow */
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+
+    /* Contain images on mobile */
+    .product-image {
+        max-width: 90% !important;
+        max-height: 160px !important;
+        margin: 5px auto;
     }
 
     .product-full-page p {
-        font-size: 0.95rem !important;
-        line-height: 1.5;
+        font-size: 0.9rem !important;
+        line-height: 1.4;
+        padding: 0 5px !important;
+        margin: 5px 0;
     }
 
-    .product-image {
-        max-height: 180px;
+    .product-table-view ul {
+        font-size: 0.95rem !important;
+        margin: 5px auto;
     }
 }
 

@@ -144,16 +144,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const sheet = createEl('div', 'page');
 
-            // P3 Background (Intro page back / page 3)
+            // P3 Background (Sheet 2 front)
             let frontClass = "page-front";
-            // if (i === 2) frontClass += " page-3-background no-texture"; // This was for page 3 front
+            if (i === 2) frontClass += " page-3-background no-texture";
 
-            // P2 Background (Back of cover / first sheet back)
+            // P2 Background (Back of cover) - Reverted to normal
             let backClass = "page-back";
-            if (i === 0) backClass += " page-2-background no-texture";
 
             sheet.innerHTML = `
-                <div class="page-front">${frontHTML}<div class="page-number">${i + 1}</div></div>
+                <div class="${frontClass}">${frontHTML}<div class="page-number">${i + 1}</div></div>
                 <div class="${backClass}">${backHTML}<div class="page-number">${i + 2}</div></div>
             `;
 
@@ -179,13 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateIntro(data) {
-        return `<div class="product-full-page text-side" style="padding: 40px 25px;">
-                    <h2 style="font-family: 'Amiri', serif; font-size: 3rem; margin-bottom: 30px;">${data.title}</h2>
-                    <p style="font-size: 1.2rem; line-height: 1.7; color: inherit; font-weight: 400;">${data.text}</p>
-                    <div style="margin-top: auto; padding-top: 50px;">
-                        <p style="font-size: 1rem; opacity: 0.9; font-weight: 400; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 15px;">
-                            مناسبة للأطفال، للرياضيين، لمرضى السكري، وللجميع!
-                        </p>
+        return `<div class="product-full-page text-side">
+                    <h2 style="margin-top: 0; font-family: 'Amiri', serif;">${data.title}</h2>
+                    <p style="margin-top: -10px;">${data.text}</p>
+                    <div style="margin-top: auto; padding-top: 40px;">
+                        <p style="font-size: 0.8rem; color: var(--primary-color);">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
                     </div>
                 </div>`;
     }
@@ -228,8 +225,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <img src="assets/instagram_new.png" class="insta-qr-img">
                         </div>
                         <div class="insta-text-box">
-                            <h2 style="margin: 0; font-size: 1.8rem; font-weight: 900; color: #1a472a; font-family: 'Cairo', sans-serif !important; letter-spacing: 1px;">Add us on Instagram!</h2>
-                            <p style="margin: 10px 0 0; color: #1a472a; opacity: 0.8; font-weight: 700;">@nawa.ps</p>
+                            <h2 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: #1a472a; font-family: 'Cairo', sans-serif !important;">Add us on Instagram!</h2>
+                            <p style="margin: 5px 0 0; color: #1a472a; opacity: 0.9; font-weight: 600; font-size: 0.9rem;">@nawa.ps</p>
                         </div>
                     </div>
                 </div>`;
