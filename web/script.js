@@ -140,12 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (let i = 0; i < contentPages.length; i += 2) {
             const frontHTML = contentPages[i];
-            const backHTML = contentPages[i + 1] || `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center;">
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <img src="assets/instagram_new.png" class="insta-qr-img" style="width: 120px; height: 120px;">
-                        <p style="color: white; margin-top: 10px;">@nawa.ps</p>
-                    </div>
-                </div>`;
+            const backHTML = contentPages[i + 1] || ''; // Removed the P27 push (fallback Instagram page)
 
             const sheet = createEl('div', 'page');
 
@@ -226,15 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateInstagramPage() {
-        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center;">
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%;">
-                        <div class="insta-qr-container" style="margin-bottom: 10px;">
-                            <img src="assets/instagram_new.png" class="insta-qr-img" style="width: 150px; height: 150px;">
-                        </div>
-                        <div class="insta-text-box" style="margin-top: 5px; background: rgba(0,0,0,0.3); padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);">
-                            <h2 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: white !important; font-family: 'Cairo', sans-serif !important;">Follow us on Instagram</h2>
-                            <p style="margin: 3px 0 0; color: white !important; opacity: 1; font-weight: 400; font-size: 0.9rem;">@nawa.ps</p>
-                        </div>
+        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center; background-image: none !important; background-color: var(--page-bg) !important;">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px;">
+                        <img src="assets/instagram.jpeg" style="max-width: 90%; max-height: 80%; object-fit: contain; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
                     </div>
                 </div>`;
     }
