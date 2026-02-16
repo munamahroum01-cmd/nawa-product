@@ -113,8 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
         contentPages.push(generateCover(bookData[0])); // Page 1
         contentPages.push(generateIntro(bookData[1]));        // P3: Collection Header
         contentPages.push(`<div class="product-full-page" style="justify-content: center; height: 100%;">
-            <h1 style="font-family: 'Amiri', serif; font-size: 2.8rem; margin-bottom: 10px; color: #1a472a;">Our Products</h1>
-            <p style="font-size: 1.2rem; color: #2d5a3f; letter-spacing: 1px;">Natural & Organic</p>
+            <h1 style="font-family: 'Amiri', serif; font-size: 2.5rem; margin-bottom: 10px;">Our Products</h1>
+            <p style="font-size: 1.1rem; letter-spacing: 1px;">Natural & Organic</p>
         </div>`);
         // Page 3
 
@@ -123,13 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
             contentPages.push(generatePhotoPage(p));
             contentPages.push(generateDescPage(p));
         });
-
-        // P24: Message Page (Special Request)
-        contentPages.push(generateMessagePage({
-            title: "طلب خاص؟",
-            text: "منتجاتنا كتيرة, بس مع هيك ما عنا مشكلة نعملكم منتج معين بناءا على طلبكم!<br>لهيك ما تترددوا تحكوا معنا اذا في طعم معين ببالكم",
-            image: "assets/productsss.png"
-        }));
 
         // P25: Locations Page
         const locationsData = bookData.find(i => i.type === 'locations');
@@ -144,11 +137,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const sheet = createEl('div', 'page');
 
-            // P3 Background (Sheet 2 front)
+            // P3 Background (Sheet 1 front)
             let frontClass = "page-front";
-            if (i === 2) frontClass += " page-3-background no-texture";
+            if (i === 2) frontClass += " page-3-background"; // Removed no-texture
 
-            // P2 Background (Back of cover) - Reverted to normal
+            // P2 Background (Back of cover)
             let backClass = "page-back";
 
             sheet.innerHTML = `
@@ -178,11 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateIntro(data) {
-        return `<div class="product-full-page text-side" style="padding-top: 60px;">
-                    <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 2.22rem;">${data.title}</h2>
-                    <p style="margin-top: 5px; font-size: 0.98rem; line-height: 1.6; opacity: 0.9;">${data.text}</p>
-                    <div style="margin-top: auto; padding-bottom: 30px;">
-                        <p style="font-size: 0.78rem; font-weight: 500; color: var(--primary-color);">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
+        return `<div class="product-full-page text-side" style="padding-top: 50px;">
+                    <h2 style="margin-top: 0; font-family: 'Amiri', serif; font-size: 1.8rem;">${data.title}</h2>
+                    <p style="margin-top: 5px; font-size: 0.9rem; line-height: 1.5; opacity: 0.9;">${data.text}</p>
+                    <div style="margin-top: auto; padding-bottom: 25px;">
+                        <p style="font-size: 0.75rem; font-weight: 400; color: var(--primary-color);">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
                     </div>
                 </div>`;
     }
@@ -224,9 +217,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="insta-qr-container">
                             <img src="assets/instagram_new.png" class="insta-qr-img">
                         </div>
-                        <div class="insta-text-box" style="margin-top: 0; background: rgba(255,255,255,0.7); padding: 8px 20px;">
-                            <h2 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #1a472a; font-family: 'Cairo', sans-serif !important;">Follow us on Instagram</h2>
-                            <p style="margin: 2px 0 0; color: #1a472a; opacity: 0.9; font-weight: 600; font-size: 0.78rem;">@nawa.ps</p>
+                        <div class="insta-text-box" style="margin-top: -5px; background: transparent; padding: 0; box-shadow: none; border: none;">
+                            <h2 style="margin: 0; font-size: 0.75rem; font-weight: 700; color: #1a472a; font-family: 'Cairo', sans-serif !important;">Follow us on Instagram</h2>
+                            <p style="margin: 2px 0 0; color: #1a472a; opacity: 0.8; font-weight: 600; font-size: 0.65rem;">@nawa.ps</p>
                         </div>
                     </div>
                 </div>`;
@@ -234,10 +227,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generateLocationsPage(data) {
         return `<div class="product-full-page text-side" style="padding-top: 20px; padding-bottom: 20px;">
-                    <img src="${data.image}" style="max-width: 85%; max-height: 180px; object-fit: contain; border-radius: 8px;">
-                    <h2 style="font-family: 'Amiri', serif; font-size: 2rem; margin-top: 10px;">${data.title}</h2>
-                    <ul style="list-style: disc; padding-inline-start: 25px; margin: 5px auto; width: fit-content; text-align: start; font-size: 1rem; line-height: 1.5;">
-                        ${data.points.map(p => `<li style="margin-bottom: 2px;">${p}</li>`).join('')}
+                    <img src="${data.image}" style="max-width: 75%; max-height: 150px; object-fit: contain; border-radius: 8px;">
+                    <h2 style="font-family: 'Amiri', serif; font-size: 1.8rem; margin-top: 10px;">${data.title}</h2>
+                    <ul style="list-style: disc; padding-inline-start: 25px; margin: 5px auto; width: fit-content; text-align: start; font-size: 0.85rem; line-height: 1.4;">
+                        ${data.points.map(p => `<li style="margin-bottom: 1px;">${p}</li>`).join('')}
                     </ul>
                 </div>`;
     }

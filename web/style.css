@@ -86,10 +86,11 @@ body {
     right: 0;
     transform-origin: left center;
     transform-style: preserve-3d;
-    transition: transform var(--transition-speed) cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform var(--transition-speed) cubic-bezier(0.25, 0.1, 0.25, 1);
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     border-radius: 5px 15px 15px 5px;
     will-change: transform;
+    backface-visibility: hidden !important;
 }
 
 .page.flipped {
@@ -105,16 +106,14 @@ body {
     -webkit-backface-visibility: hidden !important;
     /* CRITICAL FOR SAFARI */
     padding: 60px 45px;
-    /* Slightly tighter for better text room */
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    transform: translateZ(0);
+    /* Cache GPU */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
-    /* PERFORMANCE FIX: Prevent disappearing content during flips */
-    backface-visibility: visible !important;
-    -webkit-backface-visibility: visible !important;
-    transform: translateZ(0);
-    will-change: transform;
 }
 
 /* Hide scrollbars but keep functionality */
@@ -332,11 +331,12 @@ div.product-full-page>*:last-child {
 }
 
 .insta-qr-img {
-    width: 210px;
-    height: 210px;
+    width: 200px;
+    height: 200px;
     object-fit: contain;
-    /* Recolor to #1a472a using filters */
+    /* Recolor to #1a472a */
     filter: invert(21%) sepia(19%) saturate(1455%) hue-rotate(90deg) brightness(85%) contrast(100%);
+    mix-blend-mode: normal;
 }
 
 .insta-text-box {
@@ -388,10 +388,12 @@ div.product-full-page>*:last-child {
 
     .page-front,
     .page-back {
-        padding: 65px 50px !important;
+        padding: 65px 52px !important;
         /* GREATER PADDING FOR CONTAINMENT */
         overflow-x: hidden !important;
         box-sizing: border-box !important;
+        transform: none !important;
+        /* Force stability on mobile */
     }
 
     /* Contain images on mobile */
@@ -403,19 +405,19 @@ div.product-full-page>*:last-child {
 
     .nutrition-table {
         max-width: 88% !important;
-        margin: 10px auto !important;
+        margin: 8px auto !important;
     }
 
     .product-full-page p {
-        font-size: 0.9rem !important;
-        line-height: 1.45;
-        padding: 0 5px !important;
-        margin: 4px 0;
+        font-size: 0.85rem !important;
+        line-height: 1.4;
+        padding: 0 10px !important;
+        margin: 3px 0;
     }
 
     .product-table-view ul {
-        font-size: 0.9rem !important;
-        margin: 3px auto;
+        font-size: 0.88rem !important;
+        margin: 2px auto;
     }
 }
 
