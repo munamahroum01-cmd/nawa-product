@@ -1,0 +1,365 @@
+:root {
+    /* White Cream & Dark Green Theme */
+    --primary-color: #1a472a;
+    --secondary-color: #2d5a3f;
+    --accent-color: #c5e1a5;
+    --text-color: #0f2918;
+    --bg-color: #D4B996;
+    --page-bg: #fffbf0;
+
+    /* Base Book Dimensions - FIXED (Scaled by JS on small screens) */
+    --book-width: 450px;
+    --book-height: 700px;
+    --transition-speed: 0.8s;
+    /* Faster transition for better feel */
+}
+
+/* Global Box Sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: radial-gradient(circle at center, #f5ecd8 0%, #D4B996 50%, #8C7355 100%);
+    background-color: var(--bg-color);
+    font-family: 'Cairo', sans-serif;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    /* Prevent body scroll while using the book */
+}
+
+/* Background Decorations (Nuts) */
+.nut-decoration {
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.6;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+}
+
+.book-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 2000px;
+    background: radial-gradient(circle at center, #f5ecd8 0%, #D4B996 50%, #8C7355 100%);
+    overflow: hidden;
+    z-index: 100;
+}
+
+.book {
+    position: relative;
+    width: var(--book-width);
+    height: var(--book-height);
+    transform-style: preserve-3d;
+    transition: transform var(--transition-speed);
+    will-change: transform;
+}
+
+/* Page Styling */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--page-bg);
+    top: 0;
+    right: 0;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform var(--transition-speed) cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 5px 15px 15px 5px;
+    will-change: transform;
+}
+
+.page.flipped {
+    transform: rotateY(-180deg);
+}
+
+.page-front,
+.page-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    /* CRITICAL FOR SAFARI */
+    padding: 60px 45px;
+    /* Slightly tighter for better text room */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hide scrollbars but keep functionality */
+.page-front::-webkit-scrollbar,
+.page-back::-webkit-scrollbar {
+    width: 4px;
+    background: transparent;
+}
+
+.page-front::-webkit-scrollbar-thumb,
+.page-back::-webkit-scrollbar-thumb {
+    background: rgba(26, 71, 42, 0.3);
+    border-radius: 10px;
+}
+
+.page-front {
+    background-image: url('assets/Pal.jpg');
+    background-size: cover;
+    background-position: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.page-back {
+    background-image: url('assets/Pal.jpg');
+    background-size: cover;
+    background-position: center;
+    transform: rotateY(180deg);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.no-texture {
+    background-image: none !important;
+    background: white !important;
+}
+
+.page-number {
+    position: absolute;
+    top: 20px;
+    /* Moved to top as requested */
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary-color);
+    background: rgba(255, 255, 240, 0.5);
+    padding: 2px 10px;
+    border-radius: 12px;
+    z-index: 10;
+}
+
+.page-front .page-number {
+    left: 20px;
+    /* Outer edge for front page */
+}
+
+.page-back .page-number {
+    right: 20px;
+    /* Outer edge for back page */
+}
+
+/* Content Styling */
+.cover-page {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; -- Avoid this for scrollable flex */
+    text-align: center;
+    padding: 0;
+    /* Padding handled by parent container */
+}
+
+.cover-page>*:first-child {
+    margin-top: auto;
+}
+
+.cover-page>*:last-child {
+    margin-bottom: auto;
+}
+
+.cover-page h1 {
+    font-size: 3rem;
+    margin-top: 20px;
+    color: #000;
+}
+
+.logo {
+    max-width: 200px;
+    border-radius: 50%;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Amiri', serif;
+    color: var(--primary-color);
+    margin: 0 0 10px 0;
+}
+
+div.product-full-page {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    /* Padding handled by parent container */
+    text-align: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* Surgical fix for centering vs overflow */
+div.product-full-page>*:first-child {
+    margin-top: auto;
+}
+
+div.product-full-page>*:last-child {
+    margin-bottom: auto;
+}
+
+.product-table-view {
+    background: transparent;
+    padding: 0;
+    border: none;
+    width: 100%;
+    margin: 15px 0;
+    box-shadow: none;
+    color: var(--text-color);
+}
+
+.product-table-view ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px auto;
+    font-weight: bold;
+    /* Bold ingredients */
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.product-full-page p {
+    font-weight: bold;
+    /* Make descriptions bolder for readability */
+    font-size: 1rem;
+    padding: 0 10px;
+}
+
+.nutrition-table {
+    width: 100%;
+    max-width: 250px;
+    margin: 10px auto;
+    /* Ensure margin top and bottom for spacing */
+    border-radius: 8px;
+}
+
+.page-3-background {
+    background-image: url('assets/background_page3.jpeg') !important;
+    background-size: cover;
+    color: white;
+}
+
+.product-image {
+    max-width: 100%;
+    max-height: 280px;
+    /* Reduced to leave room for title and description */
+    object-fit: contain;
+    height: auto;
+    border-radius: 12px;
+    /* Removed box-shadow */
+}
+
+.product-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.instagram-page {
+    background-image: url('assets/photo.jpeg') !important;
+    background-size: 100% 100% !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    filter: none !important;
+    color: var(--primary-color);
+    padding: 0 !important;
+}
+
+.insta-qr-bubble {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(26, 71, 42, 0.2);
+}
+
+.insta-code {
+    width: 180px;
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+/* Tablet & Mobile Responsiveness */
+@media (max-width: 1024px) {
+    :root {
+        --book-width: 400px;
+        --book-height: 650px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --book-width: 300px;
+        --book-height: 480px;
+    }
+
+    .book-container {
+        perspective: 2000px;
+        height: 100svh;
+        overflow: visible;
+    }
+
+    .book {
+        transform-style: preserve-3d !important;
+    }
+
+    .page {
+        transform-style: preserve-3d !important;
+    }
+
+    .page-front,
+    .page-back {
+        padding: 50px 35px !important;
+        /* Safe mobile padding to prevent overflow */
+    }
+
+    .product-full-page p {
+        font-size: 0.88rem !important;
+        /* Slightly smaller for mobile fit */
+        line-height: 1.4;
+    }
+
+    .product-image {
+        max-height: 170px;
+    }
+}
+
+/* Hide navigation buttons */
+.controls,
+button {
+    display: none !important;
+}
