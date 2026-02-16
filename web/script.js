@@ -182,7 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<div class="product-full-page text-side">
                     <h2 style="margin-top: 0;">${data.title}</h2>
                     <p style="margin-top: -10px;">${data.text}</p>
-                    <p style="margin-top: 30px; font-weight: bold; color: var(--primary-color); font-size: 1.1rem;">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
+                    <div style="margin-top: auto; padding-top: 40px;">
+                        <p style="font-size: 0.8rem; color: var(--primary-color);">مناسبة للأطفال, للرياضيين, لمرضى السكري, وللجميع!</p>
+                    </div>
                 </div>`;
     }
 
@@ -192,14 +194,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="product-image-container">
                         ${data.image ? `<img src="${data.image}" class="product-image">` : ""}
                     </div>
-                    <p style="margin-top: 15px; font-size: 0.95rem; line-height: 1.6;">${data.description}</p>
+                    <p style="margin-top: 15px; font-size: 0.85rem; line-height: 1.5; padding: 0 10px;">${data.description}</p>
                 </div>`;
     }
 
     function generateDescPage(data) {
         return `<div class="product-full-page text-side">
                     <div class="product-table-view">
-                        <ul style="list-style: none; padding: 0; margin: 0 auto 15px; text-align: center; font-size: 1.3rem; font-weight: 600; line-height: 1.8;">
+                        <ul style="list-style: none; padding: 0; margin: 0 auto 15px; text-align: center; font-size: 1.2rem; font-weight: bold; line-height: 1.8;">
                             ${data.features.map(f => `<li>${f}</li>`).join('')}
                         </ul>
                         ${data.tableImage ? `<img src="${data.tableImage}" class="nutrition-table" style="margin-top: 10px;">` : ''}
@@ -211,16 +213,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<div class="product-full-page text-side">
         <h2>${data.title}</h2>
         <p>${data.text}</p>
-        <img src="${data.image}" style="max-width:70%; border-radius:10px;">
+        <div style="padding: 10px; display: flex; justify-content: center;">
+            <img src="${data.image}" style="max-width:65%; max-height: 350px; object-fit: contain; border-radius:10px;">
+        </div>
         </div>`;
     }
 
     function generateInstagramPage() {
-        return `<div class="product-full-page instagram-page" style="justify-content: center;">
-                    <div style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; backdrop-filter: blur(2px);">
-                        <h2 style="color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.8); margin-bottom: 20px;">Add us on Instagram!</h2>
-                        <img src="assets/instagram_new.png" style="width: 250px; margin: 0 auto; display: block; border-radius: 12px;">
-                    </div>
+        return `<div class="product-full-page instagram-page" style="justify-content: center; align-items: center;">
+                    <img src="assets/instagram_new.png" style="width: 200px; border-radius: 12px; transform: scale(1); background: transparent;">
+                    <h2 style="color: white; margin-top: 20px; text-shadow: 0 2px 5px rgba(0,0,0,0.8);">Add us on Instagram!</h2>
                 </div>`;
     }
 

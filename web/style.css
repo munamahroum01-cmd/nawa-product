@@ -59,6 +59,7 @@ body {
     height: var(--book-height);
     transform-style: preserve-3d;
     transition: transform var(--transition-speed);
+    will-change: transform;
 }
 
 /* Page Styling */
@@ -74,6 +75,7 @@ body {
     transition: transform var(--transition-speed) cubic-bezier(0.25, 1, 0.5, 1);
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     border-radius: 5px 15px 15px 5px;
+    will-change: transform;
 }
 
 .page.flipped {
@@ -92,6 +94,8 @@ body {
     -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
+    font-family: 'Cairo', sans-serif;
+    /* Unified font for all content */
 }
 
 /* Hide scrollbars but keep functionality */
@@ -253,6 +257,7 @@ div.product-full-page>*:last-child {
 .instagram-page {
     background-image: url('assets/photo.jpeg') !important;
     background-size: cover;
+    background-position: center;
     color: white;
 }
 
@@ -275,6 +280,11 @@ div.product-full-page>*:last-child {
     :root {
         --book-width: 350px;
         --book-height: 550px;
+    }
+
+    .product-image {
+        max-height: 200px;
+        /* Smaller image on mobile to prevent text clipping */
     }
 }
 
